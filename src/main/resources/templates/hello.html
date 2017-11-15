@@ -1,11 +1,67 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org"
+      layout:decorator="/base-layout" lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <title>Hello</title>
+    <title>SpringWeb with Thymeleaf DEMO</title>
+    <link rel="stylesheet" href="/css/hello-v1.0.0.css"/>
+    <script src="/script/hello-v1.0.0.js"></script>
+    <script th:inline="javascript">
+        $(function () {
+            /*<![CDATA[*/
+            for (var i = 0; i < 3; i++) {
+                console.debug("i= " + i);
+            }
+            /*]]>*/
+        })
+    </script>
 </head>
-<body>
-<h1>Hello, Spring Boot</h1>
-<address th:inline="text">by [[${user.username}]]</address>
+<body layout:fragment="main-content">
+<section>
+    <h1>Hello, Spring Boot</h1>
+    <address th:inline="text">by [[${user.username}]]</address>
+</section>
+<hr/>
+<section>
+    <h1>Using Thymeleaf</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Since</th>
+            <th>Operate</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="u,uStat:${users}" th:if="not ${#lists.isEmpty(users)}">
+            <td>
+                <input type="text" th:value="${uStat.count}" th:attr="id=${u.id}"/>
+            </td>
+            <td>
+                <input type="text" th:value="${u.username}"/>
+            </td>
+            <td>
+                <input type="text" th:value="${u.password}"/>
+            </td>
+            <td th:text="${#dates.format(u.createTime,'yyyy/MM/dd')}"></td>
+            <td>
+                <button>更新</button>
+                <button>删除</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h1>Cascade data</h1>
+    <p th:inline="text">Username: [[${address.user.username}]]</p>
+    <h1>Session data</h1>
+    <p th:text="${'Username: '+session.usr.username}"></p>
+    <h1>Iteration cascade properties</h1>
+    <th:block th:each="addr:${session.usr.addresses}">
+        <p th:text="${'Location: '+addr.location}"></p>
+    </th:block>
+</section>
+<hr/>
 </body>
 </html>
