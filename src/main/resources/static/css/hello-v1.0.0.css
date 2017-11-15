@@ -92,12 +92,12 @@ button:after {
 
 button:hover:before {
     visibility: visible;
-    left: calc(50% - 34px);
+    left: calc(50% - 42px);
 }
 
 button:hover:after {
     visibility: visible;
-    right: calc(50% - 30px);
+    right: calc(50% - 38px);
 }
 
 input[type="text"] {
