@@ -5,7 +5,9 @@
     <meta charset="UTF-8"/>
     <title>SpringWeb with Thymeleaf DEMO</title>
     <link rel="stylesheet" href="/css/hello-v1.0.0.css"/>
+    <link rel="stylesheet" href="/css/common-tools-v0.0.1.css"/>
     <script src="/script/hello-v1.0.0.js"></script>
+    <script src="/script/common-tools-v0.0.1.js"></script>
     <script th:inline="javascript">
         $(function () {
             /*<![CDATA[*/
@@ -37,18 +39,18 @@
         <tbody>
         <tr th:each="u,uStat:${users}" th:if="not ${#lists.isEmpty(users)}">
             <td>
-                <input type="text" th:value="${uStat.count}" th:attr="id=${u.id}"/>
+                <input type="text" th:value="${uStat.count}" th:attr="uid=${u.id}"/>
             </td>
             <td>
-                <input type="text" th:value="${u.username}"/>
+                <input type="text" th:value="${u.username}" class="username"/>
             </td>
             <td>
-                <input type="text" th:value="${u.password}"/>
+                <input type="text" th:value="${u.password}" class="password"/>
             </td>
             <td th:text="${#dates.format(u.createTime,'yyyy/MM/dd')}"></td>
             <td>
-                <button>Update</button>
-                <button>Delete</button>
+                <button class="btnUpdate">Update</button>
+                <button class="btnDelete">Delete</button>
             </td>
         </tr>
         </tbody>

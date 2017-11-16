@@ -1,6 +1,6 @@
 @charset "utf-8";
 body, table, tr, td {
-    font: 400 14px/20px Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+    font: 400 14px/20px Roboto, RobotoDraft, Helvetica, Arial, sans-serif, "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, tahoma, arial, simsun, 宋体;
 }
 
 hr {
@@ -48,7 +48,7 @@ table td:last-of-type {
     padding: 0;
 }
 
-button {
+.btnUpdate, .btnDelete {
     cursor: pointer;
     outline: none;
     border: none;
@@ -64,12 +64,12 @@ button {
     transition: background .5s;
 }
 
-button:hover {
+.btnUpdate:hover, .btnDelete:hover {
     background: #444;
     color: #fff;
 }
 
-button:before, button:after {
+.btnUpdate:before, .btnDelete:before, .btnUpdate:after, .btnDelete:after {
     visibility: hidden;
     position: absolute;
     top: 9px;
@@ -80,22 +80,22 @@ button:before, button:after {
     transition: all .5s;
 }
 
-button:before {
+.btnUpdate:before, .btnDelete:before {
     content: '﹥';
     left: -4px;
 }
 
-button:after {
+.btnUpdate:after, .btnDelete:after {
     content: '﹤';
     right: 0px;
 }
 
-button:hover:before {
+.btnUpdate:hover:before, .btnDelete:hover:before {
     visibility: visible;
     left: calc(50% - 42px);
 }
 
-button:hover:after {
+.btnUpdate:hover:after, .btnDelete:hover:after {
     visibility: visible;
     right: calc(50% - 38px);
 }
