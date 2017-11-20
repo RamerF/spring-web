@@ -85,6 +85,11 @@ body, div, p {
 
 }
 
+/**
+ * =======================
+ *          THE INK REACTION.
+ * =======================
+ */
 .ink-reaction-container {
     position: fixed;
     z-index: 99;
@@ -114,4 +119,16 @@ body, div, p {
     100% {
         opacity: 0;
     }
+}
+
+/**
+ * =======================
+ *          THE AJAX TABLE.
+ * =======================
+ */
+.page-container ul li button {
+    box-shadow: none;
+    border-radius: 0;
+    border: none;
+    min-width: 45px;
 }

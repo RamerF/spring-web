@@ -140,4 +140,5 @@ input[type="text"] {
 
 .page-container {
     width: 80%;
+    min-width: 800px;
 }

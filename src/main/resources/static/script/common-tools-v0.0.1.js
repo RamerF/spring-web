@@ -138,7 +138,7 @@
         //     } );
         // } );
         // } );
-        var table = $( "<table></table>" );
+        var table = $( "<table class='ajax-data-table'></table>" );
         var thead = $( "<thead></thead>" );
         var tbody = $( "<tbody></tbody>" );
         var tfoot = $( "<tfoot></tfoot>" );
@@ -173,9 +173,11 @@
             $( _container ).append( table );
             $( _container ).append( pageContainer );
             updateNumberBtn( number , totalPages );
+            $( _container ).find( "button" ).click( function( e ) {
+                $( this ).inkReaction( e );
+            } );
             $( "button[id='prevBtn'],button[id='nextBtn']" ).click( function( e ) {
                 number = globalPage.number;
-                $( this ).inkReaction( e );
                 if ($( this ).attr( "id" ).indexOf( "prev" ) > -1) {
                     _ajaxData.page = number - 1;
                     number--;
@@ -187,7 +189,6 @@
                 ajaxNewData( _url , _ajaxData , size , tbody );
             } );
             $( "button[id*='pageBtn']" ).click( function( e ) {
-                $( this ).inkReaction( e );
                 var number = $( this ).text();
                 if ($( this ).hasClass( "md-flat-btn" ) || isNaN( number )) {
                     return false;
