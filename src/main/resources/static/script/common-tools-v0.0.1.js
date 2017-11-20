@@ -166,20 +166,7 @@
             var size = globalPage.size;
             var pageContainer = initNumberBtn();
             var data = globalPage.content;
-            $.each( data , function( index ) {
-                var _obj = data[index];
-                var tr = $( "<tr></tr>" );
-                for (_prop in _columns) {
-                    var td;
-                    if (typeof (_columns[_prop].render) != "undefined") {
-                        td = $( "<td>" + _columns[_prop].render( _obj[_columns[_prop].data] ) + "</td>" );
-                    } else {
-                        td = $( "<td>" + _obj[_columns[_prop].data] + "</td>" );
-                    }
-                    tr.append( td );
-                }
-                tbody.append( tr );
-            } );
+            appendBodyData( data );
             table.append( thead );
             table.append( tbody );
             table.append( tfoot );
@@ -216,11 +203,20 @@
             var ul = $( "<ul></ul>" );
             var prevBtn = $( "<li><button class='md-btn md-raised-btn prev-btn' id='prevBtn'>Prev</button></li>" )
             $( ul ).append( prevBtn );
-            for (var i = 1; i < 8; i++) {
-                var li = $( "<li></li>" );
-                var btn = $( "<button class='md-btn md-raised-btn' id='pageBtn" + i + "'>" + i + "</button>" );
-                $( li ).append( btn );
-                $( ul ).append( li );
+            if (globalPage.totalPages >= 7) {
+                for (var i = 1; i < 8; i++) {
+                    var li = $( "<li></li>" );
+                    var btn = $( "<button class='md-btn md-raised-btn' id='pageBtn" + i + "'>" + i + "</button>" );
+                    $( li ).append( btn );
+                    $( ul ).append( li );
+                }
+            } else {
+                for (var i = 1; i < globalPage.totalPages + 1; i++) {
+                    var li = $( "<li></li>" );
+                    var btn = $( "<button class='md-btn md-raised-btn' id='pageBtn" + i + "'>" + i + "</button>" );
+                    $( li ).append( btn );
+                    $( ul ).append( li );
+                }
             }
             var nextBtn = $( "<li><button class='md-btn md-raised-btn next-btn' id='nextBtn'>Next</button></li>" )
             $( ul ).append( nextBtn );
@@ -231,15 +227,23 @@
         function updateNumberBtn( number , totalPages ) {
             number = number + 1;
             $( "#pageBtn7" ).text( totalPages );
+            $( "#prevBtn" ).prop( "disabled" , false );
+            $( "#nextBtn" ).prop( "disabled" , false );
             if (number == 1) {
                 $( "#prevBtn" ).prop( "disabled" , "disabled" );
                 colorPageBtn( "#pageBtn1" );
             } else if (number == totalPages) {
                 $( "#nextBtn" ).prop( "disabled" , "disabled" );
                 colorPageBtn( "#pageBtn7" );
-            } else {
-                $( "#prevBtn" ).prop( "disabled" , false );
-                $( "#nextBtn" ).prop( "disabled" , false );
+            }
+            if (totalPages <= 7) {
+                for (var i = 1; i <= totalPages; i++) {
+                    $( "#pageBtn" + i ).text( i );
+                    if (i == number) {
+                        colorPageBtn( "#pageBtn" + number );
+                    }
+                }
+                return false;
             }
             if (number <= 4) {
                 for (var i = 2; i < 7; i++) {
@@ -287,20 +291,24 @@
                 globalPage = page;
                 var data = globalPage.content;
                 $( tbody ).empty();
-                $.each( data , function( index ) {
-                    var _obj = data[index];
-                    var tr = $( "<tr></tr>" );
-                    for (_prop in _columns) {
-                        var td;
-                        if (typeof (_columns[_prop].render) != "undefined") {
-                            td = $( "<td>" + _columns[_prop].render( _obj[_columns[_prop].data] ) + "</td>" );
-                        } else {
-                            td = $( "<td>" + _obj[_columns[_prop].data] + "</td>" );
-                        }
-                        tr.append( td );
+                appendBodyData( data );
+            } );
+        }
+
+        function appendBodyData( data ) {
+            $.each( data , function( index ) {
+                var _obj = data[index];
+                var tr = $( "<tr></tr>" );
+                for (_prop in _columns) {
+                    var td;
+                    if (typeof (_columns[_prop].render) != "undefined") {
+                        td = $( "<td>" + _columns[_prop].render( _obj[_columns[_prop].data] ) + "</td>" );
+                    } else {
+                        td = $( "<td>" + _obj[_columns[_prop].data] + "</td>" );
                     }
-                    tbody.append( tr );
-                } );
+                    tr.append( td );
+                }
+                tbody.append( tr );
             } );
         }
     }

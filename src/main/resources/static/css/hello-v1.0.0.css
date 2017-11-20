@@ -15,6 +15,16 @@ section {
     padding: 0 5px;
 }
 
+ul {
+    padding: 0;
+    float: right;
+    list-style-type: none;
+}
+
+li {
+    float: left;
+}
+
 .ajax-table-container {
     margin-left: 16px;
 }
@@ -126,4 +136,8 @@ input[type="text"] {
 .add-container input {
     max-width: 250px;
     box-shadow: 1px 3px 5px #eee;
+}
+
+.page-container {
+    width: 80%;
 }

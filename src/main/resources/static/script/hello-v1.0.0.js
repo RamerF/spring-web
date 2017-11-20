@@ -3,7 +3,7 @@ $( function() {
     $.ajaxTable( {
         url : "/users",
         ajaxData : {
-            page : 6,
+            page : 3,
             size : 3
         },
         container : ".ajax-table-container",
