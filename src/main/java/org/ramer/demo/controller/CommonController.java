@@ -45,7 +45,7 @@ public class CommonController{
     @ResponseBody
     public CommonResponse updateUser(User user) {
         if (userService.saveOrUpdate(user).getId() > 0) {
-            return new CommonResponse(true, "Ok,success to update user info.");
+            return new CommonResponse(true, "OK,success to update user info.");
         }
         return new CommonResponse(false, "Ops,something wrong.");
     }
@@ -54,7 +54,13 @@ public class CommonController{
     @ResponseBody
     public CommonResponse deleteUser(@PathVariable("userId") Integer userId) {
         userService.delete(userId);
-        return new CommonResponse(true, "Ok,success to dete user info.");
+        return new CommonResponse(true, "OK,success to dete user info.");
+    }
+
+    @GetMapping("/users")
+    @ResponseBody
+    public List<User> getUsersPage(@RequestParam("page") int page) {
+        return userService.getUserByPage(page, 3).getContent();
     }
 
 }

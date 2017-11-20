@@ -1,19 +1,30 @@
 @charset "utf-8";
-body, table, tr, td {
+body, div, table {
     font: 400 14px/20px Roboto, RobotoDraft, Helvetica, Arial, sans-serif, "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, tahoma, arial, simsun, 宋体;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    clear: both;
 }
 
-hr {
-    width: 100%;
-    background: #E0E0E0;
-    margin: 20px 0;
+p {
+    padding: 6px 10px;
+}
+
+section {
+    padding: 0 5px;
+}
+
+.ajax-table-container {
+    margin-left: 16px;
 }
 
 table {
+    margin-top: 10px;
     border-collapse: collapse;
     border: none;
-    width: 100%;
     min-width: 800px;
+    width: 80%;
     text-align: left;
     color: #333333;
     box-shadow: 1px 2px 5px #E0E0E0;
@@ -52,6 +63,8 @@ table td:last-of-type {
     cursor: pointer;
     outline: none;
     border: none;
+    box-shadow: none;
+    color: rgba(0, 0, 0, 54);
     margin: 0;
     width: 50%;
     display: block;
@@ -108,4 +121,9 @@ input[type="text"] {
     padding: 8px 5px;
     box-sizing: border-box;
     border: none;
+}
+
+.add-container input {
+    max-width: 250px;
+    box-shadow: 1px 3px 5px #eee;
 }
