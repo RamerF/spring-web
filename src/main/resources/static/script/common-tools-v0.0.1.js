@@ -187,12 +187,16 @@
             $( _container ).append( pageContainer );
             updateNumberBtn( number , totalPages );
             $( "button[id='prevBtn'],button[id='nextBtn']" ).click( function( e ) {
+                number = globalPage.number;
                 $( this ).inkReaction( e );
-                if ($( this ).attr( "id" ).indexOf( prev ) > -1) {
+                if ($( this ).attr( "id" ).indexOf( "prev" ) > -1) {
                     _ajaxData.page = number - 1;
+                    number--;
                 } else {
                     _ajaxData.page = number + 1;
+                    number++;
                 }
+                updateNumberBtn( number , globalPage.totalPages );
                 ajaxNewData( _url , _ajaxData , size , tbody );
             } );
             $( "button[id*='pageBtn']" ).click( function( e ) {
