@@ -132,3 +132,12 @@ body, div, p {
     border: none;
     min-width: 45px;
 }
+
+.page-container p.count {
+    padding: 0;
+    height: 36px;
+    line-height: 36px;
+    margin-top: 14px;
+    float: left;
+    font-size: 14px;
+}

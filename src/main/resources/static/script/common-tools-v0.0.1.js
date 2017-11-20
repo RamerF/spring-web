@@ -115,29 +115,6 @@
             console.error( "url cannot be null" );
             return false;
         }
-        var addBtn = $( "<button id='_addBtn' class='md md-btn md-raised-btn'>NEW</button>" );
-        $( _container ).append( addBtn );
-        // $( addBtn ).on( "click" , function() {
-        // var addContainer = $( "<div class='add-container'></div>" );
-        // var usernameNode = $( "<input type='text' name='username'/>" );
-        // var passwordNode = $( "<input type='text' name='password'/>" );
-        // var addNode = $( "<button id='_doAdd' class='md md-16'>ADD</button>" );
-        // $( addContainer ).append( usernameNode ).append( passwordNode ).append( addNode );
-        // $( this ).after( addContainer );
-        // $( addNode ).on( "click" , function() {
-        //     var username = $( this ).prev( "input[name='username']" ).val();
-        //     var password = $( this ).prev( "input[name='password']" ).val();
-        //     console.debug( username + "><" + password );
-        //     $.post( "/user" , {
-        //         "username" : username,
-        //         "password" : password
-        //     } , function() {
-        //         $.alert( {
-        //             content : "Success to add user."
-        //         } );
-        //     } );
-        // } );
-        // } );
         var table = $( "<table class='ajax-data-table'></table>" );
         var thead = $( "<thead></thead>" );
         var tbody = $( "<tbody></tbody>" );
@@ -164,7 +141,15 @@
             var totalElements = globalPage.totalElements;
             // size of per page
             var size = globalPage.size;
-            var pageContainer = initNumberBtn();
+            var pageContainer = $( "<div class='page-container'></div>" );
+            var staticInfo = "<p class='count' id='ajaxTableCount'>from: " + (number * size + 1) + " to:  "
+                    + ((number + 1) * size) + " ,total: " + totalElements + "</p>";
+            if (totalElements % size != 0 && number + 1 == totalPages) {
+                staticInfo = "<p class='count' id='ajaxTableCount'>from: " + (number * size + 1) + " to:  "
+                        + totalElements + " ,total: " + totalElements + "</p>";
+            }
+            $( pageContainer ).append( staticInfo );
+            initNumberBtn( pageContainer );
             var data = globalPage.content;
             appendBodyData( data );
             table.append( thead );
@@ -200,7 +185,6 @@
             } );
         } );
         function initNumberBtn( pageContainer ) {
-            var pageContainer = $( "<div class='page-container'></div>" );
             var ul = $( "<ul></ul>" );
             var prevBtn = $( "<li><button class='md-btn md-raised-btn prev-btn' id='prevBtn'>Prev</button></li>" )
             $( ul ).append( prevBtn );
@@ -222,7 +206,6 @@
             var nextBtn = $( "<li><button class='md-btn md-raised-btn next-btn' id='nextBtn'>Next</button></li>" )
             $( ul ).append( nextBtn );
             $( pageContainer ).append( ul );
-            return pageContainer;
         }
 
         function updateNumberBtn( number , totalPages ) {
@@ -293,6 +276,13 @@
                 var data = globalPage.content;
                 $( tbody ).empty();
                 appendBodyData( data );
+                var staticInfo = "from: " + (globalPage.number * globalPage.size + 1) + " to:  "
+                        + ((globalPage.number + 1) * globalPage.size) + " ,total: " + globalPage.totalElements;
+                if (globalPage.totalElements % globalPage.size != 0 && globalPage.number + 1 == globalPage.totalPages) {
+                    staticInfo = "from: " + (globalPage.number * globalPage.size + 1) + " to:  "
+                            + globalPage.totalElements + " ,total: " + globalPage.totalElements;
+                }
+                $( "#ajaxTableCount" ).text( staticInfo );
             } );
         }
 

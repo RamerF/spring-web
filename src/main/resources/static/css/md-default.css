@@ -22,6 +22,7 @@
     color: #fff;
     border-radius: 2px;
     height: 36px;
+    min-width: 88px;
 }
 
 .md-btn[disabled] {
@@ -31,14 +32,12 @@
 
 .md-raised-btn {
     padding: 0 16px;
-    min-width: 88px;
     background: #2196F3;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
 }
 
 .md-flat-btn {
     padding: 0 8px;
-    min-width: 88px;
     background: rgba(66, 66, 66, 0);
     color: #212121;
 }
