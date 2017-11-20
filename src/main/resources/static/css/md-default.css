@@ -24,6 +24,10 @@
     height: 36px;
 }
 
+.md-btn[disabled] {
+    background: rgba(0, 0, 0, .21);
+}
+
 .md-raised-btn {
     padding: 0 16px;
     background: #2196F3;
@@ -33,12 +37,12 @@
 .md-flat-btn {
     padding: 0 8px;
     min-width: 88px;
-    margin: 20px;
     background: rgba(66, 66, 66, 0);
     color: #212121;
 }
 
 .md-flat-btn:hover {
+    transition: all .5s;
     background: rgba(66, 66, 66, 0.2);
 }
 
@@ -59,13 +63,13 @@
 }
 
 .md-divider {
-    border:none;
+    border: none;
     height: 1px;
     background: rgba(0, 0, 0, .12);
 }
 
 .md-divider-dark {
-    border:none;
+    border: none;
     height: 1px;
     background: rgba(255, 255, 255, .12);
 }

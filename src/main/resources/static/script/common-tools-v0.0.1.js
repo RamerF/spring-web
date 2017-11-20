@@ -18,10 +18,12 @@
                 }
             }
         } , opts || {} );
+
         function clearConfirm() {
             $( main ).remove();
             $( mask ).remove();
         }
+
         var _title = paras.title;
         var _content = paras.content;
         var _width = paras.width;
@@ -68,10 +70,12 @@
         } , opts || {} );
         var _content = paras.content;
         var _timeout = paras.timeout;
+
         function clearAlert() {
             $( main ).remove();
             $( mask ).remove();
         }
+
         var mask = $( "<div class='common-mask alert-mask'></div>" );
         $( "body" ).append( mask );
         var main = $( "<div class='alert-main'><p>" + _content + "</p></div>" );
@@ -149,13 +153,24 @@
             thr.append( th );
         }
         thead.append( thr );
-        $.get( _url , _ajaxData , function( data ) {
+        var globalPage;
+        $.get( _url , _ajaxData , function( page ) {
+            globalPage = page;
+            // total pages
+            var totalPages = globalPage.totalPages;
+            // current page number 
+            var number = globalPage.number;
+            // total elements
+            var totalElements = globalPage.totalElements;
+            // size of per page
+            var size = globalPage.size;
+            var pageContainer = initNumberBtn();
+            var data = globalPage.content;
             $.each( data , function( index ) {
                 var _obj = data[index];
                 var tr = $( "<tr></tr>" );
                 for (_prop in _columns) {
                     var td;
-                    console.debug( _prop + " : " + _obj[_columns[_prop].data] );
                     if (typeof (_columns[_prop].render) != "undefined") {
                         td = $( "<td>" + _columns[_prop].render( _obj[_columns[_prop].data] ) + "</td>" );
                     } else {
@@ -169,7 +184,121 @@
             table.append( tbody );
             table.append( tfoot );
             $( _container ).append( table );
+            $( _container ).append( pageContainer );
+            updateNumberBtn( number , totalPages );
+            $( "button[id='prevBtn'],button[id='nextBtn']" ).click( function( e ) {
+                $( this ).inkReaction( e );
+                if ($( this ).attr( "id" ).indexOf( prev ) > -1) {
+                    _ajaxData.page = number - 1;
+                } else {
+                    _ajaxData.page = number + 1;
+                }
+                ajaxNewData( _url , _ajaxData , size , tbody );
+            } );
+            $( "button[id*='pageBtn']" ).click( function( e ) {
+                $( this ).inkReaction( e );
+                var number = $( this ).text();
+                if ($( this ).hasClass( "md-flat-btn" ) || isNaN( number )) {
+                    return false;
+                }
+                number -= 1;
+                updateNumberBtn( number , globalPage.totalPages );
+                _ajaxData.page = number;
+                ajaxNewData( _url , _ajaxData , size , tbody );
+            } );
         } );
+        function initNumberBtn( pageContainer ) {
+            var pageContainer = $( "<div class='page-container'></div>" );
+            var ul = $( "<ul></ul>" );
+            var prevBtn = $( "<li><button class='md-btn md-raised-btn prev-btn' id='prevBtn'>Prev</button></li>" )
+            $( ul ).append( prevBtn );
+            for (var i = 1; i < 8; i++) {
+                var li = $( "<li></li>" );
+                var btn = $( "<button class='md-btn md-raised-btn' id='pageBtn" + i + "'>" + i + "</button>" );
+                $( li ).append( btn );
+                $( ul ).append( li );
+            }
+            var nextBtn = $( "<li><button class='md-btn md-raised-btn next-btn' id='nextBtn'>Next</button></li>" )
+            $( ul ).append( nextBtn );
+            $( pageContainer ).append( ul );
+            return pageContainer;
+        }
+
+        function updateNumberBtn( number , totalPages ) {
+            number = number + 1;
+            $( "#pageBtn7" ).text( totalPages );
+            if (number == 1) {
+                $( "#prevBtn" ).prop( "disabled" , "disabled" );
+                colorPageBtn( "#pageBtn1" );
+            } else if (number == totalPages) {
+                $( "#nextBtn" ).prop( "disabled" , "disabled" );
+                colorPageBtn( "#pageBtn7" );
+            } else {
+                $( "#prevBtn" ).prop( "disabled" , false );
+                $( "#nextBtn" ).prop( "disabled" , false );
+            }
+            if (number <= 4) {
+                for (var i = 2; i < 7; i++) {
+                    if (i == 6) {
+                        $( "#pageBtn" + i ).text( "..." );
+                    } else {
+                        $( "#pageBtn" + i ).text( i );
+                    }
+                    if (i == number) {
+                        colorPageBtn( "#pageBtn" + number );
+                    }
+                }
+            } else if (number > totalPages - 4) {
+                var btnNum = 2;
+                for (var i = totalPages - 5; i < totalPages; i++) {
+                    if (btnNum == 2) {
+                        $( "#pageBtn" + btnNum ).text( "..." );
+                    } else {
+                        $( "#pageBtn" + btnNum ).text( i );
+                    }
+                    if (i == number) {
+                        colorPageBtn( "#pageBtn" + btnNum );
+                    }
+                    btnNum++;
+                }
+            } else {
+                $( "#pageBtn2" ).text( "..." );
+                $( "#pageBtn3" ).text( number - 1 );
+                $( "#pageBtn4" ).text( number );
+                $( "#pageBtn5" ).text( number + 1 );
+                $( "#pageBtn6" ).text( "..." );
+                colorPageBtn( "#pageBtn4" );
+            }
+        }
+
+        function colorPageBtn( selector ) {
+            $( selector ).parents( "ul" ).find( "button[class*='md-flat-btn']" ).removeClass( "md-flat-btn" ).addClass(
+                    "md-raised-btn" )
+            $( selector ).removeClass( "md-raised-btn" ).addClass( "md-flat-btn" );
+        }
+
+        function ajaxNewData( url , ajaxData , size , tbody ) {
+            ajaxData.size = size;
+            $.get( url , ajaxData , function( page ) {
+                globalPage = page;
+                var data = globalPage.content;
+                $( tbody ).empty();
+                $.each( data , function( index ) {
+                    var _obj = data[index];
+                    var tr = $( "<tr></tr>" );
+                    for (_prop in _columns) {
+                        var td;
+                        if (typeof (_columns[_prop].render) != "undefined") {
+                            td = $( "<td>" + _columns[_prop].render( _obj[_columns[_prop].data] ) + "</td>" );
+                        } else {
+                            td = $( "<td>" + _obj[_columns[_prop].data] + "</td>" );
+                        }
+                        tr.append( td );
+                    }
+                    tbody.append( tr );
+                } );
+            } );
+        }
     }
     /**
      * add ink reaction for html cell.

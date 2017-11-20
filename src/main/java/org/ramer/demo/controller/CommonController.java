@@ -2,6 +2,7 @@ package org.ramer.demo.controller;
 
 import org.ramer.demo.domain.*;
 import org.ramer.demo.service.UserService;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -59,8 +60,8 @@ public class CommonController{
 
     @GetMapping("/users")
     @ResponseBody
-    public List<User> getUsersPage(@RequestParam("page") int page) {
-        return userService.getUserByPage(page, 3).getContent();
+    public Page<User> getUsersPage(@RequestParam("page") int page, @RequestParam("size") int size) {
+        return userService.getUserByPage(page, size);
     }
 
 }
