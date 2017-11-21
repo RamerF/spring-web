@@ -52,7 +52,7 @@
         var _opacity = paras.opacity;
         var _stylePrefix = paras.style;
         var _btnSure = paras.btnSure;
-        var _btnCancel = paras.btnCancle;
+        var _btnCancel = paras.btnCancel;
         var mask = $( "<div class='common-mask'></div>" );
         var main = $( "<div class='confirm-main'></div>" );
         var contentContainer = $( "<div class='md-dialog'></div>" );
