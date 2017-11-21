@@ -51,6 +51,15 @@ public class CommonController{
         return new CommonResponse(false, "Ops,something wrong.");
     }
 
+    @PostMapping("/user/add")
+    @ResponseBody
+    public CommonResponse addUser(User user) {
+        if (userService.saveOrUpdate(user).getId() > 0) {
+            return new CommonResponse(true, "OK,success to add user info.");
+        }
+        return new CommonResponse(false, "Ops,something wrong.");
+    }
+
     @DeleteMapping("/user/delete/{userId}")
     @ResponseBody
     public CommonResponse deleteUser(@PathVariable("userId") Integer userId) {

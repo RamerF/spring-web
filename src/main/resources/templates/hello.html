@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="/css/common-tools-v0.0.1.css"/>
     <link rel="stylesheet" href="/css/md-default.css"/>
     <link rel="stylesheet" href="/css/hello-v1.0.0.css"/>
-    <script src="/script/hello-v1.0.0.js"></script>
+    <script src="/script/md-default.js"></script>
     <script src="/script/common-tools-v0.0.1.js"></script>
+    <script src="/script/hello-v1.0.0.js"></script>
     <script th:inline="javascript">
         $(function () {
             /*<![CDATA[*/
@@ -27,7 +28,24 @@
 <hr class="md-divider"/>
 <section>
     <h1>Using Thymeleaf</h1>
-    <table>
+    <button id='addBtn' class='md md-btn md-raised-btn'>NEW</button>
+    <form class="user-form">
+        <div class="md-form">
+            <div>
+                <input type="text" id="username" name="username"/>
+                <label for="username">Username</label>
+            </div>
+            <div>
+                <input type="text" id="password" name="password"/>
+                <label for="password">Password</label>
+            </div>
+            <div class="btn-container">
+                <input type="reset" class="md md-btn md-raised-btn" value="reset"/>
+                <input type="submit" class="md md-btn md-raised-btn" id="newUser" value="submit"/>
+            </div>
+        </div>
+    </form>
+    <table class="user-table">
         <thead>
         <tr>
             <th>No.</th>
@@ -50,8 +68,8 @@
             </td>
             <td th:text="${#dates.format(u.createTime,'yyyy/MM/dd')}"></td>
             <td>
-                <button class="btnUpdate">Update</button>
-                <button class="btnDelete">Delete</button>
+                <button class="md-btn md-flat-btn btnUpdate">Update</button>
+                <button class="md-btn md-flat-btn btnDelete">Delete</button>
             </td>
         </tr>
         </tbody>

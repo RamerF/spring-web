@@ -29,7 +29,7 @@ $( function() {
             data : "createTime",
             render : function( data ) {
                 var createTime = new Date( data );
-                var date = createTime.getUTCDate();
+                var date = createTime.getUTCDate() + 1;
                 var month = createTime.getUTCMonth() + 1;
                 var year = createTime.getUTCFullYear();
                 return date + "/" + month + "/" + year;
@@ -37,7 +37,8 @@ $( function() {
             }
         }, {
             data : "operator"
-        } ]
+        } ],
+        editable : true
     } );
     $( ".btnUpdate" ).click( function() {
         var thisNode = $( this );
@@ -109,5 +110,29 @@ $( function() {
 
     $( "button[class*='md-']" ).click( function( e ) {
         $( this ).inkReaction( e );
+    } );
+    $( "#addBtn" ).click( function() {
+        $( ".user-form" ).slideToggle();
+    } );
+    $( "#newUser" ).click( function() {
+        var username = $( ".md-form input[name='username']" ).val();
+        var password = $( ".md-form input[name='password']" ).val();
+        console.debug( username )
+        console.debug( password )
+        $.post( "/user/add" , {
+            "username" : username,
+            "password" : password
+        } , function( data ) {
+            $.alert( {
+                content : data.message,
+                timeout : 2,
+                callback : function() {
+                    if (data.result == true) {
+                        $( ".user-form" ).slideToggle();
+                    }
+                }
+            } )
+        } );
+        return false;
     } );
 } )

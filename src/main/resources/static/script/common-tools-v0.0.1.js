@@ -151,6 +151,7 @@
             container : "ajax-table-container",
             columns : {},
             thead : {},
+            editable : false,
             callback : function() {
             }
         } , opts || {} );
@@ -159,6 +160,7 @@
         var _container = paras.container;
         var _columns = paras.columns;
         var _thead = paras.thead;
+        var _editable = paras.editable;
         if (_url == null) {
             console.error( "url cannot be null" );
             return false;
@@ -190,7 +192,7 @@
             // size of per page
             var size = globalPage.size;
             var pageContainer = $( "<div class='page-container'></div>" );
-            var staticInfo = "<p class='count' id='ajaxTableCount'>from: " + (number * size + 1) + " to:  "
+            var staticInfo = "<p class='count' id='ajaxTableCount'>from " + (number * size + 1) + " to  "
                     + ((number + 1) * size) + " ,total: " + totalElements + "</p>";
             if (totalElements % size != 0 && number + 1 == totalPages) {
                 staticInfo = "<p class='count' id='ajaxTableCount'>from: " + (number * size + 1) + " to:  "
@@ -199,7 +201,7 @@
             $( pageContainer ).append( staticInfo );
             initNumberBtn( pageContainer );
             var data = globalPage.content;
-            appendBodyData( data );
+            appendBodyData( data , _editable );
             table.append( thead );
             table.append( tbody );
             table.append( tfoot );
@@ -323,27 +325,34 @@
                 globalPage = page;
                 var data = globalPage.content;
                 $( tbody ).empty();
-                appendBodyData( data );
-                var staticInfo = "from: " + (globalPage.number * globalPage.size + 1) + " to:  "
+                appendBodyData( data , _editable );
+                var staticInfo = "from " + (globalPage.number * globalPage.size + 1) + " to  "
                         + ((globalPage.number + 1) * globalPage.size) + " ,total: " + globalPage.totalElements;
                 if (globalPage.totalElements % globalPage.size != 0 && globalPage.number + 1 == globalPage.totalPages) {
-                    staticInfo = "from: " + (globalPage.number * globalPage.size + 1) + " to:  "
+                    staticInfo = "from " + (globalPage.number * globalPage.size + 1) + " to  "
                             + globalPage.totalElements + " ,total: " + globalPage.totalElements;
                 }
                 $( "#ajaxTableCount" ).text( staticInfo );
             } );
         }
 
-        function appendBodyData( data ) {
+        function appendBodyData( data , editable ) {
             $.each( data , function( index ) {
                 var _obj = data[index];
                 var tr = $( "<tr></tr>" );
                 for (_prop in _columns) {
                     var td;
                     if (typeof (_columns[_prop].render) != "undefined") {
-                        td = $( "<td>" + _columns[_prop].render( _obj[_columns[_prop].data] ) + "</td>" );
+                        if (editable)
+                            td = $( "<td><input type='text' value='"
+                                    + _columns[_prop].render( _obj[_columns[_prop].data] ) + "'/></td>" );
+                        else
+                            td = $( "<td>" + _columns[_prop].render( _obj[_columns[_prop].data] ) + "</td>" );
                     } else {
-                        td = $( "<td>" + _obj[_columns[_prop].data] + "</td>" );
+                        if (editable)
+                            td = $( "<td><input type='text' value='" + _obj[_columns[_prop].data] + "'/></td>" );
+                        else
+                            td = $( "<td>" + _obj[_columns[_prop].data] + "</td>" );
                     }
                     tr.append( td );
                 }

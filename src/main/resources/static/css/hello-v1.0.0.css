@@ -1,18 +1,20 @@
 @charset "utf-8";
-body, div, table {
-    font: 400 14px/20px Roboto, RobotoDraft, Helvetica, Arial, sans-serif, "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, tahoma, arial, simsun, 宋体;
+body, div, table, h1 {
+    font-weight: 500;
+    line-height: 36px;
+    font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif, "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, tahoma, arial, simsun, 宋体;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     clear: both;
 }
 
-p {
-    padding: 6px 10px;
-}
-
 section {
     padding: 0 5px;
+}
+
+section p {
+    padding: 0 10px;
 }
 
 ul {
@@ -26,10 +28,10 @@ li {
 }
 
 .ajax-table-container {
-    margin-left: 16px;
+    margin-left: 5px;
 }
 
-table {
+table.user-table {
     margin-top: 10px;
     border-collapse: collapse;
     border: none;
@@ -40,90 +42,42 @@ table {
     box-shadow: 1px 2px 5px #E0E0E0;
 }
 
-table tr {
+table.user-table tr {
     border-bottom: 1px solid #E0E0E0;
 }
 
-table tbody tr:nth-of-type(2n), table tbody tr:nth-of-type(2n) input {
+table.user-table tbody tr:nth-of-type(2n), table.user-table tbody tr:nth-of-type(2n) input {
     background: #eee;
 }
 
-table tbody tr:nth-of-type(2n+1) {
+table.user-table tbody tr:nth-of-type(2n+1) {
     background: #fff;
 }
 
-table td, table th {
-    line-height: 35px;
+table.user-table td, table.user-table th {
+    line-height: 34px;
     width: 23%;
     padding-left: 6px;
     border-left: 1px solid #E0E0E0;
     vertical-align: middle;
 }
 
-table td:first-of-type, table th:first-of-type {
+table.user-table td:first-of-type, table.user-table th:first-of-type {
     border-left: none;
     width: 8%;
 }
 
-table td:last-of-type {
+table.user-table td:last-of-type {
     padding: 0;
 }
 
 .btnUpdate, .btnDelete {
-    cursor: pointer;
-    outline: none;
-    border: none;
-    box-shadow: none;
     color: rgba(0, 0, 0, 54);
-    margin: 0;
-    width: 50%;
-    display: block;
     float: left;
-    padding: 10px 5px;
-    background: transparent;
-    border-right: 1px solid #E0E0E0;
-    font: 400 14px/15px "微软雅黑";
-    position: relative;
-    transition: background .5s;
+    width: 50%;
 }
 
-.btnUpdate:hover, .btnDelete:hover {
-    background: #444;
-    color: #fff;
-}
-
-.btnUpdate:before, .btnDelete:before, .btnUpdate:after, .btnDelete:after {
-    visibility: hidden;
-    position: absolute;
-    top: 9px;
-    width: 12px;
-    color: #fff;
-    overflow: hidden;
-    transform: scale(2.5);
-    transition: all .5s;
-}
-
-.btnUpdate:before, .btnDelete:before {
-    content: '﹥';
-    left: -4px;
-}
-
-.btnUpdate:after, .btnDelete:after {
-    content: '﹤';
-    right: 0px;
-}
-
-.btnUpdate:hover:before, .btnDelete:hover:before {
-    visibility: visible;
-    left: calc(50% - 42px);
-}
-
-.btnUpdate:hover:after, .btnDelete:hover:after {
-    visibility: visible;
-    right: calc(50% - 38px);
-}
-
-input[type="text"] {
+table.user-table input[type="text"] {
     width: 100%;
     margin: 0;
     display: block;
@@ -138,7 +92,11 @@ input[type="text"] {
     box-shadow: 1px 3px 5px #eee;
 }
 
-.page-container {
-    width: 80%;
-    min-width: 800px;
+.user-form {
+    display: none;
+}
+
+.md-form {
+    width: 250px;
+    margin: auto;
 }

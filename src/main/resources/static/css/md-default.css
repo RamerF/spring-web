@@ -4,17 +4,21 @@
     src: url('/font/Roboto.woff2') format('woff2');
 }
 
+body {
+    font: 500 14px/36px Roboto, RobotoDraft, Helvetica, Arial, sans-serif, "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, tahoma, arial, simsun, 宋体;
+}
+
 .md {
     font-size: 14px;
     font-family: 'Roboto';
+    font-weight: 500;
     margin: 0;
     padding: 0;
 }
 
-.md-dense {
-    font-size: 13px;
-}
-
+/**
+ * THE BUTTON
+ */
 .md-btn {
     outline: none;
     border: none;
@@ -23,30 +27,47 @@
     border-radius: 2px;
     height: 36px;
     min-width: 88px;
+    line-height: 36px;
+    vertical-align: middle;
+    margin: 0;
+    display: inline-block;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    overflow: hidden;
+    will-change: box-shadow;
+    transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+}
+
+.md-btn:active {
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .2);
 }
 
 .md-btn[disabled] {
-    background: rgba(0, 0, 0, .21);
+    background-color: rgba(0, 0, 0, .21);
     cursor: not-allowed;
 }
 
 .md-raised-btn {
     padding: 0 16px;
-    background: #2196F3;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+    background-color: #2196F3;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
 }
 
 .md-flat-btn {
     padding: 0 8px;
-    background: rgba(66, 66, 66, 0);
+    background-color: rgba(66, 66, 66, 0);
     color: #212121;
 }
 
 .md-flat-btn:hover {
-    transition: all .5s;
-    background: rgba(66, 66, 66, 0.2);
+    transition: all .2s;
+    background-color: rgba(66, 66, 66, 0.2);
 }
 
+/**
+ * THE DIALOG.
+ */
 .md-dialog {
     padding: 24px;
 }
@@ -63,14 +84,92 @@
     margin-right: 4px;
 }
 
+/**
+ * THE DIVIDER.
+ */
 .md-divider {
     border: none;
     height: 1px;
-    background: rgba(0, 0, 0, .12);
+    background-color: rgba(0, 0, 0, .12);
 }
 
 .md-divider-dark {
     border: none;
     height: 1px;
-    background: rgba(255, 255, 255, .12);
+    background-color: rgba(255, 255, 255, .12);
+}
+
+/**
+ *  THE FORM.
+ */
+.md-form {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.md-form input[type='text'], .md-form input[type='password'] {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #757575;
+    padding: 8px 0;
+    width: 100%;
+    font-size: 14px;
+}
+
+.md-form .focused input:focus + label, .md-form .filled label {
+    color: #2962FF;
+    font-size: 12px;
+    top: 0;
+}
+
+.md-form label {
+    position: absolute;
+    left: 0;
+    top: 26px;
+    bottom: 0;
+    transition: all .5s;
+    width: 100%;
+    pointer-events: none;
+}
+
+.md-form label:after {
+    content: '';
+    bottom: 26px;
+    left: 45%;
+    height: 2px;
+    width: 20px;
+    visibility: hidden;
+    position: absolute;
+    transition-duration: .2s;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+    background-color: #2962FF;
+}
+
+.md-form .focused input:focus + label:after, .md-form .filled label:after {
+    left: 0;
+    visibility: visible;
+    width: 100%;
+}
+
+.md-form div {
+    width: 250px;
+    padding: 24px 0;
+    position: relative;
+}
+
+.md-form .btn-container {
+    text-align: right;
+}
+
+/**
+ * THE COLORED AND DENSE CELL.
+ */
+
+.md-gray {
+    background-color: rgba(158, 158, 158, .2);
+    color: rgba(0, 0, 0, 87);
+}
+
+.md-dense {
+    font-size: 13px;
 }
