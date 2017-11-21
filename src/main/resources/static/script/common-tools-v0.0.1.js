@@ -1,4 +1,25 @@
+/**
+ *  Jquery common-tools v0.0.1.
+ * Author: Tang Xiaofeng
+ * Email: feng1390635973@gmail.com
+ * Date: 20/11/2017
+ */
 (function() {
+    /**
+     * do confirm.
+     * @param opts
+     * {
+     *  title, content, width, height, opacity,
+     *  btnSure: {
+     *        content,
+     *        callback
+     *      }
+     *   btnCancel: {
+     *          content,
+     *          callback
+     *      }
+     * }
+     */
     $.confirm = function( opts ) {
         var paras = $.extend( {
             title : "Tip",
@@ -11,7 +32,7 @@
                 callback : function() {
                 }
             },
-            btnCancle : {
+            btnCancel : {
                 content : "NO",
                 callback : function() {
                     clearConfirm();
@@ -48,11 +69,13 @@
         $( main ).append( contentContainer );
         $( main ).append( main_btn );
         $( "body" ).append( main );
-        $( btnSureNode ).click( function() {
+        $( btnSureNode ).click( function( e ) {
+            $( this ).inkReaction( e , main );
             _btnSure.callback();
             clearConfirm();
         } );
-        $( btnCancelNode ).click( function() {
+        $( btnCancelNode ).click( function( e ) {
+            $( this ).inkReaction( e , main );
             _btnCancel.callback();
             clearConfirm();
         } );
@@ -61,6 +84,14 @@
         } );
         return false;
     }
+    /**
+     *  do alert.
+     * @param opts
+     *  {
+     *      content: the alert content,
+     *      timeout: time to disappear.
+     *  }
+     */
     $.alert = function( opts ) {
         var paras = $.extend( {
             content : "some message .",
@@ -96,6 +127,23 @@
             paras.callback();
         }
     }
+    /**
+     *  use ajax to get data(for org.springframework.data.domain.Page) and append table .
+     * @param  opts
+     *  {
+     *      url, ajaxData, container,
+     *      columns:[
+     *          data: the propId,
+     *          render: the data render.
+     *      ],
+     *      thead: [
+     *          data: the thead content,
+     *          width: the thead width.
+     *      ],
+     *      callback
+     *  }
+     *                          
+     */
     $.ajaxTable = function( opts ) {
         var paras = $.extend( {
             url : null,
@@ -305,20 +353,25 @@
     }
     /**
      * add ink reaction for html cell.
-     * @param e
+     * @param [relativeContainer] the container contains style transform.
      */
-    $.fn.inkReaction = function( e ) {
+    $.fn.inkReaction = function( e , relativeContainer ) {
         var thisNode = $( this );
         var width = $( thisNode ).outerWidth();
         var height = $( thisNode ).outerHeight();
         var top = $( thisNode ).offset().top;
         var left = $( thisNode ).offset().left;
-
         var inkReactionContainer = $( '<div></div>' );
         $( inkReactionContainer ).addClass( "ink-reaction-container" );
         $( inkReactionContainer ).css( "width" , width + 'px' );
         $( inkReactionContainer ).css( "left" , left + 'px' );
         $( inkReactionContainer ).css( "top" , top + 'px' );
+        if (relativeContainer) {
+            var relativeTop = $( relativeContainer ).offset().top;
+            var relativeLeft = $( relativeContainer ).offset().left;
+            $( inkReactionContainer ).css( "left" , (left - relativeLeft) + 'px' );
+            $( inkReactionContainer ).css( "top" , (top - relativeTop) + 'px' );
+        }
         $( inkReactionContainer ).css( "height" , height + 'px' );
         $( thisNode ).append( inkReactionContainer );
         var radius = (width > height ? width : height) * 2;

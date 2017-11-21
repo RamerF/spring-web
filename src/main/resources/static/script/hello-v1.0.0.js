@@ -7,7 +7,6 @@ $( function() {
             size : 3
         },
         container : ".ajax-table-container",
-        size : 3,
         thead : [ {
             data : "No.",
             width : "60px"
