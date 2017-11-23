@@ -1,5 +1,6 @@
 package org.ramer.demo.controller;
 
+import io.swagger.annotations.*;
 import org.ramer.demo.domain.*;
 import org.ramer.demo.service.UserService;
 import org.springframework.data.domain.Page;
@@ -69,6 +70,10 @@ public class CommonController{
 
     @GetMapping("/users")
     @ResponseBody
+    @ApiOperation("get users page")
+    @ApiResponses({ @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 401, message = "You are not authorized access the resource"),
+            @ApiResponse(code = 404, message = "The resource not found") })
     public Page<User> getUsersPage(@RequestParam("page") int page, @RequestParam("size") int size) {
         return userService.getUserByPage(page, size);
     }
