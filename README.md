@@ -1,7 +1,5 @@
 # spring-web
 A demo web project use Spring Boot deploy.
-Framework or Specification:
-Spring 、SpringMVC、Spring、、.
 
 ### DEMO lists
 
