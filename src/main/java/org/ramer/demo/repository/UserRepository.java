@@ -10,4 +10,6 @@ public interface UserRepository extends JpaRepository<User, Integer>{
     @Modifying
     @Query(value = "delete from User where id = :id")
     void delete(@Param("id") Integer id);
+
+    User getByUsername(String username);
 }

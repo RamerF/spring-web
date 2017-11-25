@@ -134,6 +134,7 @@
      *      url, ajaxData, container,
      *      columns:[
      *          data: the propId,
+     *          editable: enable edit,
      *          render: the data render.
      *      ],
      *      thead: [
@@ -160,7 +161,7 @@
         var _container = paras.container;
         var _columns = paras.columns;
         var _thead = paras.thead;
-        var _editable = paras.editable;
+        var _callback = paras.callback;
         if (_url == null) {
             console.error( "url cannot be null" );
             return false;
@@ -201,7 +202,7 @@
             $( pageContainer ).append( staticInfo );
             initNumberBtn( pageContainer );
             var data = globalPage.content;
-            appendBodyData( data , _editable );
+            appendBodyData( data );
             table.append( thead );
             table.append( tbody );
             table.append( tfoot );
@@ -234,6 +235,7 @@
                 ajaxNewData( _url , _ajaxData , size , tbody );
             } );
         } );
+        _callback();
         function initNumberBtn( pageContainer ) {
             var ul = $( "<ul></ul>" );
             var prevBtn = $( "<li><button class='md-btn md-raised-btn prev-btn' id='prevBtn'>Prev</button></li>" )
@@ -325,7 +327,7 @@
                 globalPage = page;
                 var data = globalPage.content;
                 $( tbody ).empty();
-                appendBodyData( data , _editable );
+                appendBodyData( data );
                 var staticInfo = "from " + (globalPage.number * globalPage.size + 1) + " to  "
                         + ((globalPage.number + 1) * globalPage.size) + " ,total: " + globalPage.totalElements;
                 if (globalPage.totalElements % globalPage.size != 0 && globalPage.number + 1 == globalPage.totalPages) {
@@ -336,20 +338,21 @@
             } );
         }
 
-        function appendBodyData( data , editable ) {
+        function appendBodyData( data ) {
             $.each( data , function( index ) {
                 var _obj = data[index];
                 var tr = $( "<tr></tr>" );
                 for (_prop in _columns) {
                     var td;
+                    var editable = _columns[_prop].editable;
                     if (typeof (_columns[_prop].render) != "undefined") {
-                        if (editable)
+                        if (typeof (editable) != "undefined" && editable == true)
                             td = $( "<td><input type='text' value='"
                                     + _columns[_prop].render( _obj[_columns[_prop].data] ) + "'/></td>" );
                         else
                             td = $( "<td>" + _columns[_prop].render( _obj[_columns[_prop].data] ) + "</td>" );
                     } else {
-                        if (editable)
+                        if (typeof (editable) != "undefined" && editable == true)
                             td = $( "<td><input type='text' value='" + _obj[_columns[_prop].data] + "'/></td>" );
                         else
                             td = $( "<td>" + _obj[_columns[_prop].data] + "</td>" );

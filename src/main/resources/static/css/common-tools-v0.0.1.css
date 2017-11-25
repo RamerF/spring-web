@@ -144,13 +144,17 @@ table.ajax-data-table tr {
 }
 
 table.ajax-data-table td, table.ajax-data-table th {
-    padding-left: 6px;
+    line-height: 34px;
     border-left: 1px solid #E0E0E0;
     vertical-align: middle;
 }
 
 table.ajax-data-table td:first-of-type, table.ajax-data-table th:first-of-type {
     border-left: none;
+}
+
+table.ajax-data-table td:last-of-type {
+    padding: 0;
 }
 
 table.ajax-data-table tbody tr:nth-of-type(2n+1), table.ajax-data-table tbody tr:nth-of-type(2n+1) input {

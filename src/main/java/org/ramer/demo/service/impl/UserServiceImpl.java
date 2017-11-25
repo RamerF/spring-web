@@ -43,4 +43,9 @@ public class UserServiceImpl implements UserService{
         Pageable pageable = new PageRequest(page, size, sort);
         return userRepository.findAll(pageable);
     }
+
+    @Override
+    public User getByName(String username) {
+        return userRepository.getByUsername(username);
+    }
 }

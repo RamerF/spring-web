@@ -22,9 +22,11 @@ $( function() {
         columns : [ {
             data : "id"
         }, {
-            data : "username"
+            data : "username",
+            editable : true
         }, {
-            data : "password"
+            data : "password",
+            editable : true
         }, {
             data : "createTime",
             render : function( data ) {
@@ -38,11 +40,14 @@ $( function() {
         }, {
             data : "operator"
         } ],
-        editable : true
     } );
+    var csrf = $( "#_csrf" ).val();
     $( ".btnUpdate" ).click( function() {
         var thisNode = $( this );
         var uid = $( thisNode ).parents( "tr" ).find( "input[uid]" ).attr( "uid" );
+        if (typeof (uid) == "undefined") {
+            uid = $( thisNode ).parents( "tr" ).find( "button[uid]" ).attr( "uid" );
+        }
         var username = $( thisNode ).parents( "tr" ).find( "input[class='username']" ).val();
         var password = $( thisNode ).parents( "tr" ).find( "input[class='password']" ).val();
         console.debug( "userId = " + uid );
@@ -61,7 +66,8 @@ $( function() {
                         data : {
                             "id" : uid,
                             "username" : username,
-                            "password" : password
+                            "password" : password,
+                            "_csrf" : csrf
                         }
                     } ).done( function( data ) {
                         $.alert( {
@@ -77,6 +83,9 @@ $( function() {
     $( ".btnDelete" ).click( function() {
         var thisNode = $( this );
         var uid = $( thisNode ).parents( "tr" ).find( "input[uid]" ).attr( "uid" );
+        if (typeof (uid) == "undefined") {
+            uid = $( thisNode ).parents( "tr" ).find( "button[uid]" ).attr( "uid" );
+        }
         var username = $( thisNode ).parents( "tr" ).find( "input[class='username']" ).val();
         console.log( "userId = " + uid );
         $.confirm( {
@@ -88,7 +97,10 @@ $( function() {
                     console.debug( "delete user info" );
                     $.ajax( {
                         url : "/user/delete/" + uid,
-                        type : "DELETE",
+                        type : "PUT",
+                        data : {
+                            "_csrf" : csrf
+                        },
                     } ).done( function( data ) {
                         $.alert( {
                             content : data.message,
@@ -135,4 +147,5 @@ $( function() {
         } );
         return false;
     } );
+
 } )

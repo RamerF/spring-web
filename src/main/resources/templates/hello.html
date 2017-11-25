@@ -18,6 +18,74 @@
             }
             /*]]>*/
         })
+
+        function updateUser(thisNode, userId) {
+            var csrf = $("#_csrf").val();
+            var username = $(thisNode).parents("tr").find("input:eq(0)").val();
+            var password = $(thisNode).parents("tr").find("input:eq(1)").val();
+            console.debug("userId = " + userId);
+            console.debug("username = " + username);
+            console.debug("password = " + password);
+            $.confirm({
+                title: "Tip",
+                content: "You are modifying information of " + username + " ?",
+                btnSure: {
+                    content: "YES",
+                    callback: function () {
+                        console.debug("update user info");
+                        $.ajax({
+                            url: "/user/update/" + userId,
+                            type: "PUT",
+                            data: {
+                                "id": userId,
+                                "username": username,
+                                "password": password,
+                                "_csrf": csrf
+                            }
+                        }).done(function (data) {
+                            $.alert({
+                                content: data.message,
+                                timeout: 1
+                            })
+                        })
+                    }
+                },
+            });
+        }
+
+        function deleteUser(thisNode, userId) {
+            var csrf = $("#_csrf").val();
+            var username = $(thisNode).parents("tr").find("input:eq(0)").val();
+            $.confirm({
+                title: "WARN !",
+                content: "You are deleting information of " + username + " ?",
+                btnSure: {
+                    content: "YES",
+                    callback: function () {
+                        console.debug("delete user info");
+                        $.ajax({
+                            url: "/user/delete/" + userId,
+                            type: "PUT",
+                            data: {
+                                "_csrf": csrf
+                            },
+                        }).done(function (data) {
+                            $.alert({
+                                content: data.message,
+                                timeout: 1,
+                                callback: function () {
+                                    if (data.result == true) {
+                                        $(thisNode).parents("tr").fadeOut('normal', function () {
+                                            $(this).remove();
+                                        });
+                                    }
+                                }
+                            })
+                        });
+                    }
+                }
+            });
+        }
     </script>
 </head>
 <body layout:fragment="main-content">
@@ -30,6 +98,10 @@
     <h1>Using Thymeleaf</h1>
     <button id='addBtn' class='md md-btn md-raised-btn'>NEW</button>
     <form class="user-form">
+        <input type="hidden"
+               th:name="${_csrf.parameterName}"
+               id="_csrf"
+               th:value="${_csrf.token}"/>
         <div class="md-form">
             <div>
                 <input type="text" id="username" name="username"/>

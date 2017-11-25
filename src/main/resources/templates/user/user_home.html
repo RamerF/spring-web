@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org"
+      layout:decorator="/base-layout" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:inline="text">Welcome to [[${session.user.username}]]'s home</title>
+</head>
+<body layout:fragment="main-content">
+<section>
+    <h1 th:inline="text">Hello, [[${session.user.username}]]</h1>
+</section>
+</body>
+</html>

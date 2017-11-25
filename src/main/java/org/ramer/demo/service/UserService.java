@@ -13,4 +13,6 @@ public interface UserService{
     void delete(User user);
 
     Page<User> getUserByPage(int page, int size);
+
+    User getByName(String username);
 }
