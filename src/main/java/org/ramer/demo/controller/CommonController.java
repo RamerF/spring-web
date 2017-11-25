@@ -105,18 +105,17 @@ public class CommonController{
     }
 
     @GetMapping("/login")
-    public String input(User user, Map<String, Object> map) {
+    public String input() {
         return "user_input";
     }
 
     @RequestMapping("/sign_in")
     @ResponseBody
-    public CommonResponse userSignIn(Map<String, Object> map, HttpSession session, Principal principal) {
+    public CommonResponse userSignIn(HttpSession session, Principal principal) {
         if (principal == null) {
             return new CommonResponse(false, "Username or password not correct.");
         }
         User user = userService.getByName(principal.getName());
-        map.put("user", user);
         session.setAttribute("user", user);
         SavedRequest savedRequest = (SavedRequest) session.getAttribute("SPRING_SECURITY_SAVED_REQUEST");
         if (savedRequest != null) {
