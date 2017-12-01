@@ -5,8 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.ramer.demo.domain.*;
-import org.ramer.demo.service.RolesService;
-import org.ramer.demo.service.UserService;
+import org.ramer.demo.service.*;
 import org.ramer.demo.util.EncryptUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,6 +25,19 @@ public class CommonController{
     private UserService userService;
     @Resource
     private RolesService rolesService;
+    @Resource
+    private TopicService topicService;
+
+    @GetMapping("/")
+    public String demoList(Map<String, Object> map) {
+        map.put("topics", topicService.getAll());
+        return "demo_list";
+    }
+
+    @GetMapping("/preview")
+    public String preview() {
+        return "markdown_preview";
+    }
 
     @GetMapping("/hello")
     public String sayHello(Map<String, Object> map, HttpSession session) {
@@ -79,7 +91,7 @@ public class CommonController{
         return new CommonResponse(true, "OK,success to dete user info.");
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     @GetMapping("/users")
     @ResponseBody
     @ApiOperation("get users page")
@@ -121,7 +133,7 @@ public class CommonController{
         if (savedRequest != null) {
             return new CommonResponse(true, savedRequest.getRedirectUrl());
         }
-        return new CommonResponse(true, "/hello");
+        return new CommonResponse(true, "/");
     }
 
     @PostMapping("/signup")

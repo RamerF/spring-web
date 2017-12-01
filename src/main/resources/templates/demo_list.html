@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org"
+      layout:decorator="/base_layout" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>SpringWeb with Thymeleaf DEMO</title>
+    <link rel="stylesheet" href="/css/md-default.css"/>
+    <link rel="stylesheet" href="/css/demo_list.css"/>
+</head>
+<body layout:fragment="main_content">
+<h1 class="title">Spring-Web DEMO List</h1>
+<ul class="list-container">
+    <a th:each="t:${topics}" th:href="${t.url}">
+        <li>
+            <img th:src="${t.album}"/>
+            <p th:text="${t.title}"></p>
+        </li>
+    </a>
+</ul>
+</body>
+</html>

@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.annotation.Resource;
 
@@ -24,9 +25,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/css/**", "/font/**", "/base-layout", "user_input").permitAll()
-                .antMatchers("/user/**").hasRole("USER").and().formLogin().loginPage("/login")
-                .successForwardUrl("/sign_in").failureUrl("/sign_in");
+        http.authorizeRequests().antMatchers("/css/**", "/script/**", "/font/**", "/base_layout", "user_input").permitAll()
+                .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/manage/**").hasRole("ADMIN").and()
+                .formLogin().loginPage("/login").successForwardUrl("/sign_in").failureUrl("/sign_in")
+                .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").permitAll();
     }
 
     @Override

@@ -20,19 +20,19 @@ public class EncryptUtil{
     private static BCryptPasswordEncoder encoder;
 
     @PostConstruct
-    public void initBCryptPasswordEncoder() {
+    public void initBCrymptPasswordEncoder() {
         encoder = new BCryptPasswordEncoder(8, new SecureRandom("ramer".getBytes()));
     }
 
     public static String execEncrypt(Object string) {
         String encode = encoder.encode(string.toString());
-        log.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "  encrypt: [{}],[{}]", string, encode);
+        log.info("  encrypt: [{}],[{}]", string, encode);
         return encode;
     }
 
     public static boolean matches(String plainPassword, String encodedPassword) {
         boolean matches = encoder.matches(plainPassword, encodedPassword);
-        log.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "  matches password: [{}]", matches);
+        log.info("  matches password: [{}]", matches);
         return matches;
     }
 }

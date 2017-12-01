@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org"
-      layout:decorator="/base-layout" lang="en">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" layout:decorator="/base_layout" lang="en">
 <head>
     <meta charset="UTF-8"/>
     <title>SpringWeb with Thymeleaf DEMO</title>
@@ -88,7 +88,7 @@
         }
     </script>
 </head>
-<body layout:fragment="main-content">
+<body layout:fragment="main_content">
 <section>
     <h1>Hello, Spring Boot</h1>
     <address th:inline="text">by [[${user.username}]]</address>
@@ -117,7 +117,7 @@
             </div>
         </div>
     </form>
-    <table class="user-table">
+    <table sec:authorize="hasRole('USER')" class="user-table">
         <thead>
         <tr>
             <th>No.</th>
@@ -156,6 +156,6 @@
     </th:block>
 </section>
 <hr class="md-divider"/>
-<div class="ajax-table-container"></div>
+<div sec:authorize="hasRole('USER')" class="ajax-table-container"></div>
 </body>
 </html>

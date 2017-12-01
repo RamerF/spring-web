@@ -2,7 +2,6 @@ package org.ramer.demo.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.ramer.demo.service.UserService;
-import org.ramer.demo.util.EncryptUtil;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
@@ -23,7 +22,6 @@ public class CustomUserService implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        EncryptUtil.execEncrypt("ramer");
         org.ramer.demo.domain.User user = userService.getByName(username);
         log.debug("loadUserByUsername  username: [{}]", username);
         if (user == null) {

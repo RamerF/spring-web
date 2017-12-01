@@ -1,0 +1,122 @@
+form h1 {
+    text-align: center;
+}
+
+div.upload-container {
+    text-align: right;
+}
+
+.upload-file-name {
+    margin-top: 13px;
+    float: left;
+    display: block;
+}
+
+.upload-btn {
+    border: none;
+    min-width: 36px;
+    box-sizing: border-box;
+    width: 36px;
+    height: 36px;
+    border-radius: 36px;
+    outline: none;
+    line-height: 36px;
+    font-size: 16px;
+    cursor: pointer;
+    background: #2196f3;
+    color: #fff;
+    box-shadow: 1px 2px 2px 0 rgba(0, 0, 0, .14), 1px 3px 1px -2px rgba(0, 0, 0, .2), 1px 1px 5px 0 rgba(0, 0, 0, .12);
+    transition: box-shadow .1s cubic-bezier(.4, 0, 1, 1);
+}
+
+.upload-btn:active {
+    box-shadow: 1px 4px 5px 0 rgba(0, 0, 0, .14), 1px 1px 10px 0 rgba(0, 0, 0, .12), 1px 2px 4px -1px rgba(0, 0, 0, .2);
+}
+
+div.upload-progress {
+    height: 1px;
+    width: 100%;
+    padding: 0;
+    margin-top: 8px;
+    background: #757575;
+}
+
+div.upload-progress div {
+    width: 0;
+    padding: 0;
+    margin: auto;
+    height: 2px;
+    background: #2962FF;
+    transition: all .5s;
+}
+
+div.topic {
+    display: table;
+    width: 250px;
+    margin: auto;
+    display: flex;
+}
+
+div.topic-info {
+    width: 250px;
+    margin: 10px;
+    transition: all 3s;
+}
+
+div.preview-container {
+    display: none;
+    width: 250px;
+    height: 350px;
+    overflow: hidden;
+    transition: all 1s;
+    overflow: hidden;
+    position: relative;
+    animation: preview-pic-anim 1s ease-in-out;
+}
+
+.preview-container img {
+    width: 60%;
+    margin: auto;
+    display: block;
+    float: left;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.submit-container {
+    margin-top: -25px;
+}
+
+.submit-container button {
+    float: right;
+}
+
+@keyframes preview-topic-anim {
+
+    0% {
+        transform: translateX(-115px);
+        background: #fff;
+    }
+
+    100% {
+        transform: translateX(0);
+        background: #fff;
+    }
+
+}
+
+@keyframes preview-pic-anim {
+    from {
+        opacity: 1;
+        transform: translateX(145px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+}

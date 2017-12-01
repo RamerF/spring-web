@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org"
+      layout:decorator="/manage/manage_layout"
+      lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Spring-Web Manage</title>
+    <link rel="stylesheet" href="/css/common-tools-v0.0.1.css"/>
+    <link rel="stylesheet" href="/css/manage/manage_index.css"/>
+    <script src="/script/common-tools-v0.0.1.js"/>
+    <script src="/script/qiniu/moxie.js"/>
+    <script src="/script/qiniu/plupload.dev.js"/>
+    <script src="/script/qiniu/qiniu.min.js"/>
+    <script src="/script/manage/manage-index-v1.0.0.js"/>
+</head>
+<body>
+<div layout:fragment="content_body" class="container">
+    <form>
+        <input type="hidden"
+               th:name="${_csrf.parameterName}"
+               id="_csrf"
+               th:value="${_csrf.token}"/>
+        <h1>Publish new topic</h1>
+        <div class="topic">
+            <div id="preview-container" class="preview-container"></div>
+            <div class="md-form topic-info">
+                <div>
+                    <input type="text" name="title" id="title"/>
+                    <label for="title">Title</label>
+                </div>
+                <div>
+                    <input type="text" name="url" id="url"/>
+                    <label for="url">Url</label>
+                </div>
+                <div id="upload-container" class="upload-container">
+                    <span id="fileName" class="upload-file-name"></span>
+                    <button class="upload-btn" id="uploadBtn">＋</button>
+                    <div class="upload-progress">
+                        <div></div>
+                    </div>
+                </div>
+                <div class="submit-container">
+                    <input class="md-btn md-raised-btn" type="reset" value="reset"/>
+                    <button class="md-btn md-raised-btn" id="addTopic">submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

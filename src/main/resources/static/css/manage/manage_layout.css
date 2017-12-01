@@ -1,0 +1,94 @@
+/* common style*/
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    clear: both;
+    background: #f5f5f5;
+    min-width: 800px;
+    color: rgba(0, 0, 0, .87);
+}
+
+a {
+    text-decoration: none;
+    color: rgba(0, 0, 0, .87);
+}
+
+a:hover {
+
+}
+
+a:active {
+}
+
+li {
+    list-style: none;
+}
+
+/* the nav header and sidebar*/
+.nav-header {
+    display: table;
+    position: fixed;
+    top: 0;
+    height: 55px;
+    min-width: 800px;
+    margin: 0;
+    color: rgba(0, 0, 0, .87);
+    width: 100%;
+    background: #f5f5f5;
+    border-bottom: 1px solid #BDBDBD;
+}
+
+.nav-header-left {
+    float: left;
+}
+
+.nav-header-left a {
+    color: rgba(0, 0, 0, .87);
+    font-size: 20px;
+    line-height: 55px;
+    padding-left: 16px;
+}
+
+.nav-header-right ul {
+    float: right;
+    margin: 0;
+    padding: 0;
+    padding: 0 16px 0 0;
+}
+
+.nav-header-right ul li {
+    float: left;
+    list-style: none;
+    line-height: 55px;
+    padding: 0px 16px;
+}
+
+.nav-sidebar {
+    float: left;
+    padding: 0;
+    margin: 55px 0 0 0;
+    box-sizing: border-box;
+    background: #f5f5f5;
+    width: 200px;
+}
+
+.nav-sidebar li {
+    padding: 8px 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, .21);
+}
+
+.nav-sidebar li a {
+    color: rgba(0, 0, 0, .87);
+}
+
+.container {
+    float: right;
+    margin-top: 55px;
+    padding: 10px;
+    width: calc(100% - 200px);
+    background: #ffffff;
+    box-sizing: border-box;
+    border-left: 1px solid rgba(0, 0, 0, .21);
+    border-bottom: 1px solid rgba(0, 0, 0, .21)
+}

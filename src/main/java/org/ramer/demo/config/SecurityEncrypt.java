@@ -24,11 +24,11 @@ public class SecurityEncrypt implements AuthenticationProvider{
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         Object credentials = authentication.getCredentials();
-        log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + " username : {}", username);
-        log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + " passwords : {}", credentials);
+        log.debug(" username : {}", username);
+        log.debug(" passwords : {}", credentials);
         UserDetails user = userService.loadUserByUsername(username);
         if (!EncryptUtil.matches(credentials.toString(), user.getPassword())) {
-            throw new BadCredentialsException("密码不对头");
+            throw new BadCredentialsException("bad password");
         }
         return new UsernamePasswordAuthenticationToken(user, credentials, user.getAuthorities());
     }
