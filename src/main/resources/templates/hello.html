@@ -117,7 +117,7 @@
             </div>
         </div>
     </form>
-    <table sec:authorize="hasRole('USER')" class="user-table">
+    <table sec:authorize="hasAnyRole('USER','ADMIN')" class="user-table">
         <thead>
         <tr>
             <th>No.</th>
@@ -156,6 +156,6 @@
     </th:block>
 </section>
 <hr class="md-divider"/>
-<div sec:authorize="hasRole('USER')" class="ajax-table-container"></div>
+<div sec:authorize="hasAnyRole('USER','ADMIN')" class="ajax-table-container"></div>
 </body>
 </html>

@@ -133,7 +133,8 @@ $( function() {
         console.debug( password )
         $.post( "/user/add" , {
             "username" : username,
-            "password" : password
+            "password" : password,
+            "_csrf": csrf
         } , function( data ) {
             $.alert( {
                 content : data.message,
