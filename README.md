@@ -12,6 +12,7 @@ A demo web project use Spring Boot deploy.
   - $.confirm
   - $(selector).ajaxTable
   - ...
+ - Jdbc CRUD
  - ...
 
 ### Contact
