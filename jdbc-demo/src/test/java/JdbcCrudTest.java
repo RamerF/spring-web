@@ -27,7 +27,7 @@ public class JdbcCrudTest{
 
     /** 直接获取连接*/
     public Connection getConnectionOrigin() {
-        String url = "jdbc:mysql://localhost:3306/dev";
+        String url = "jdbc:mysql://localhost:3306/spring_web?useSSL=false";
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(url, "root", "ramer");
@@ -74,8 +74,8 @@ public class JdbcCrudTest{
             log.info(" testRead : id={},username={},password={},createTime={}", id, username, password, createTime);
             // 方式二 ,注意索引从1开始
             ResultSetMetaData metaData = resultSet.getMetaData();
-            for (int i = 1; i < metaData.getColumnCount(); i++) {
-                String propName = metaData.getColumnLabel(i);
+            for (int i = 1; i < metaData.getColumnCount() + 1; i++) {
+                String propName = metaData.getColumnName(i);
                 Object propVal = resultSet.getObject(propName);
                 log.info(" testRead : {}={}", propName, propVal);
             }
