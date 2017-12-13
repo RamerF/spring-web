@@ -4,6 +4,7 @@ $( function() {
     qiniuUploader( "uploadBtn" , "upload-container" , {
         'FileUploaded' : function( up , file , info ) {
             album = up.getOption( 'domain' ) + "/" + JSON.parse( info ).key;
+            $( "#addTopic" ).click( addTopic )
         },
         'FilesAdded' : function( up , files ) {
             plupload.each( files , function( file ) {
@@ -21,39 +22,37 @@ $( function() {
             } );
         }
     } );
-    if (!album) {
-        $( "#addTopic" ).click( function() {
-            var title = $( "#title" ).val();
-            var url = $( "#url" ).val();
-            $.logInfo( "add new topic : title:{}, url:{}, album:{}" , title , url , album );
-            $.post( "/manage/topic" , {
-                "url" : url,
-                "title" : title,
-                "album" : album,
-                "_csrf" : csrf
-            } , function( data ) {
-                $.alert( data.message );
-                if (data.result == true) {
-                    $.confirm( {
-                        title : "Tip",
-                        content : data.message,
-                        btnSure : {
-                            content : "I know",
-                            callback : function() {
-                                location.reload();
-                            }
-                        },
-                        btnCancel : {
-                            content : "ok",
-                            callback : function() {
-                                location.reload();
-                            }
+    function addTopic() {
+        var title = $( "#title" ).val();
+        var url = $( "#url" ).val();
+        $.logInfo( "add new topic : title:{}, url:{}, album:{}" , title , url , album );
+        $.post( "/manage/topic" , {
+            "url" : url,
+            "title" : title,
+            "album" : album,
+            "_csrf" : csrf
+        } , function( data ) {
+            $.alert( data.message );
+            if (data.result == true) {
+                $.confirm( {
+                    title : "Tip",
+                    content : data.message,
+                    btnSure : {
+                        content : "I know",
+                        callback : function() {
+                            location.reload();
                         }
-                    } )
-                }
-            } );
-            return false;
-        } )
+                    },
+                    btnCancel : {
+                        content : "ok",
+                        callback : function() {
+                            location.reload();
+                        }
+                    }
+                } )
+            }
+        } );
+        return false;
     }
     /*<![CDATA[*/
     function qiniuUploader( browse_button , container , init ) {
