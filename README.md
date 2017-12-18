@@ -13,6 +13,8 @@ A demo web project use Spring Boot deploy.
   - $(selector).ajaxTable
   - ...
  - Jdbc CRUD
+ - Using OkHttpClient to process http request
+ - Convert JSON / XML to object and inverse
  - ...
 
 ### Contact

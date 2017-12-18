@@ -4,9 +4,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.OkHttpClient;
 import org.ramer.demo.domain.*;
 import org.ramer.demo.service.*;
 import org.ramer.demo.util.EncryptUtil;
+import org.ramer.demo.util.HttpUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.web.savedrequest.SavedRequest;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.*;
@@ -27,6 +30,10 @@ public class CommonController{
     private RolesService rolesService;
     @Resource
     private TopicService topicService;
+    @Resource
+    private OkHttpClient okHttpClient;
+    @Resource
+    private LocationService locationService;
 
     @GetMapping("/")
     public String demoList(Map<String, Object> map) {
@@ -123,11 +130,16 @@ public class CommonController{
 
     @RequestMapping("/sign_in")
     @ResponseBody
-    public CommonResponse userSignIn(HttpSession session, Principal principal) {
+    public CommonResponse userSignIn(HttpSession session, HttpServletRequest request, Principal principal) {
         if (principal == null) {
             return new CommonResponse(false, "Username or password not correct.");
         }
         User user = userService.getByName(principal.getName());
+        Location location = HttpUtil.getLocationByIP(request, okHttpClient);
+        if (location != null) {
+            location.setUser(user);
+            locationService.saveOrUpdate(location);
+        }
         session.setAttribute("user", user);
         SavedRequest savedRequest = (SavedRequest) session.getAttribute("SPRING_SECURITY_SAVED_REQUEST");
         if (savedRequest != null) {
