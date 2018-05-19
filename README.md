@@ -7,7 +7,7 @@ A demo web project use Spring Boot deploy.
 - Spring-Data-Jpa CRUD
 - Spring-Security
 - Thymeleaf
-- JQuery closures
+- JQuery tools
   - $.alert 
   - $.confirm
   - $(selector).ajaxTable
