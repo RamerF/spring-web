@@ -55,13 +55,10 @@ public class DemoController{
     @GetMapping("/parseXml")
     @ResponseBody
     public CommonResponse parseXml() {
-        String locationXml = HttpUtil.get(String.join("/", "http:/", INDEX_URL, "demo/transferXml"), String.class,
+        Location location = HttpUtil.get(String.join("/", "http:/", INDEX_URL, "demo/transferXml"), Location.class,
                 HttpUtil.MediaType.XML, okHttpClient);
-        XStream xStream = new XStream();
-        xStream.processAnnotations(Location.class);
-        Location location = (Location) xStream.fromXML(locationXml);
         log.debug(" parseXml : {}", JSONObject.toJSONString(location));
-        return new CommonResponse(true, locationXml);
+        return new CommonResponse(true, JSONObject.toJSONString(location));
     }
 
 }

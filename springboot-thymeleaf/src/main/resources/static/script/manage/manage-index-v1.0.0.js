@@ -94,7 +94,7 @@ $( function() {
                     //返回值为保存文件名
                     // var fileName = file.name.substr( 0 , file.name.lastIndexOf( "." ) );
                     // var suffix = file.name.substr( fileName.length );
-                    // return fileName + "-" + new Date().format( "yyyyMMddhhmmss" ) + suffix;
+                    // return fileName + "-" + $.dateFormat( new Date(),"yyyyMMddhhmmss" ) + suffix;
                     return file.name;
                 }
             }

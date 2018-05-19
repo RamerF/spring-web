@@ -1,6 +1,7 @@
 package org.ramer.demo.util;
 
 import com.alibaba.fastjson.JSON;
+import com.thoughtworks.xstream.XStream;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.ramer.demo.domain.Location;
@@ -17,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class HttpUtil{
 
     public static Location getLocationByIP(HttpServletRequest req, OkHttpClient okHttpClient) {
-        IpLocation ipLocation = requestJsonString(
+        IpLocation ipLocation = getJsonString(
                 String.join("=", "http://ip.taobao.com/service/getIpInfo2.php?ip", getRealIp(req)), IpLocation.class,
                 okHttpClient);
         log.debug("ip info: {}", ipLocation);
@@ -44,16 +45,20 @@ public class HttpUtil{
     public static <T> T get(String url, Class<T> clazz, MediaType mediaType, OkHttpClient okHttpClient) {
         switch (mediaType) {
         case JSON:
-            return requestJsonString(url, clazz, okHttpClient);
+            return getJsonString(url, clazz, okHttpClient);
         case XML:
-            return (T) requestXmlString(url, okHttpClient);
+            return (T) getXmlString(url, clazz, okHttpClient);
         default:
             return null;
         }
     }
 
-    private static <T> T requestJsonString(String url, Class<T> clazz, OkHttpClient okHttpClient) {
-        Request request = new Request.Builder().url(url).build();
+    private static <T> T getJsonString(String url, Class<T> clazz, OkHttpClient okHttpClient) {
+        RequestBody requestBody = new FormBody.Builder()
+                //                .add("key","value")
+                //                .add("key","value")
+                .build();
+        Request request = new Request.Builder().post(requestBody).url(url).build();
         try {
             Response response = okHttpClient.newCall(request).execute();
             String string = response.body().string();
@@ -65,13 +70,15 @@ public class HttpUtil{
         return null;
     }
 
-    private static String requestXmlString(String url, OkHttpClient okHttpClient) {
+    private static <T> T getXmlString(String url, Class<T> clazz, OkHttpClient okHttpClient) {
         Request request = new Request.Builder().url(url).build();
         try {
             Response response = okHttpClient.newCall(request).execute();
             String string = response.body().string();
             log.debug("response: \n{}", string);
-            return string;
+            XStream xStream = new XStream();
+            xStream.processAnnotations(clazz);
+            return (T) xStream.fromXML(string);
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }

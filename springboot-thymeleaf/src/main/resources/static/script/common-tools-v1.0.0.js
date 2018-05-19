@@ -1,8 +1,8 @@
 /**
- *  Jquery common-tools v0.0.1.
+ *  Jquery common-tools v1.0.0.
  * Author: Tang Xiaofeng
  * Email: feng1390635973@gmail.com
- * Date: 20/11/2017
+ * Date: 25/11/2017
  */
 (function() {
     /**
@@ -399,25 +399,33 @@
         } );
     }
 
-    Date.prototype.format = function( format ) {
-        var o = {
-            "M+" : this.getMonth() + 1,
-            "d+" : this.getDate(),
-            "h+" : this.getHours(),
-            "m+" : this.getMinutes(),
-            "s+" : this.getSeconds(),
-            "q+" : Math.floor( (this.getMonth() + 3) / 3 ),
-            "S" : this.getMilliseconds()
+    /**
+     * Format date with specification pattern.
+     * @param date Date or Milliseconds
+     * @param pattern eg: 'yyyy/MM/dd hh:mm:ss'
+     */
+    $.dateFormat = function( date , pattern ) {
+        if (typeof date == "number") {
+            date = new Date( date );
         }
-        if (/(y+)/.test( format )) {
-            format = format.replace( RegExp.$1 , (this.getFullYear() + "").substr( 4 - RegExp.$1.length ) );
+        var obj = {
+            "M+" : date.getMonth() + 1,
+            "d+" : date.getDate(),
+            "h+" : date.getHours(),
+            "m+" : date.getMinutes(),
+            "s+" : date.getSeconds(),
+            "q+" : Math.floor( (date.getMonth() + 3) / 3 ),
+            "S" : date.getMilliseconds()
         }
-        for ( var k in o) {
-            if (new RegExp( "(" + k + ")" ).test( format )) {
-                format = format.replace( RegExp.$1 , RegExp.$1.length == 1 ? o[k] : ("00" + o[k])
-                        .substr( ("" + o[k]).length ) );
+        if (/(y+)/.test( pattern )) {
+            pattern = pattern.replace( RegExp.$1 , (date.getFullYear() + "").substr( 4 - RegExp.$1.length ) );
+        }
+        for ( var k in obj) {
+            if (new RegExp( "(" + k + ")" ).test( pattern )) {
+                pattern = pattern.replace( RegExp.$1 , RegExp.$1.length == 1 ? obj[k] : ("00" + obj[k])
+                        .substr( ("" + obj[k]).length ) );
             }
         }
-        return format;
+        return pattern;
     }
 })( jQuery )
