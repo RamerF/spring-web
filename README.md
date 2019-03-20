@@ -19,8 +19,8 @@ A demo web project use Spring Boot deploy.
 
 ### Follow
 
-!["Wechat"](https://drive.google.com/uc?export=view&id=1lFH00E6eKMWrPzskdpymtWnkCXcukhE_ "Wechat")
-!["Wechat Mp"](https://drive.google.com/uc?export=view&id=1fzkpRuU4S0Pk3AGNetckHhxwLobPoQKT "Wechat Mp")
+!["Wechat"](https://drive.google.com/uc?export=view&id=1Zl6t6fXx0w0m5nH5yrREqIo1bVhSBpoT)
+!["Wechat Mp"](https://drive.google.com/uc?export=view&id=1C42NrtMp_-aFDh-otLvnqLT-ibPVgXTR)
 
 ### Contact
 
