@@ -24,6 +24,8 @@
         <java.version>1.8</java.version>
         <lombok.version>1.16.18</lombok.version>
         <mysql-connector-java.version>5.1.41</mysql-connector-java.version>
+        <druid.version>1.1.2</druid.version>
+        <log4jdbc.version>1.2</log4jdbc.version>
         <c3p0.version>5.2.9.Final</c3p0.version>
         <jackson.version>2.8.10</jackson.version>
         <swagger-ui.version>2.7.0</swagger-ui.version>
@@ -55,11 +57,24 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-connector-java.version}</version>
+            <scope>compile</scope>
         </dependency>
         <!--spring-data-jpa-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <!--druid-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+        <!--log4jdbc-->
+        <dependency>
+            <groupId>com.googlecode.log4jdbc</groupId>
+            <artifactId>log4jdbc</artifactId>
+            <version>${log4jdbc.version}</version>
         </dependency>
         <!--c3p0-->
         <dependency>

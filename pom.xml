@@ -26,7 +26,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>spring-web</name>
     <description>Sample web project use Spring deploy.</description>
