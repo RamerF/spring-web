@@ -12,8 +12,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = { "privileges", "user" })
-@ToString(exclude = { "privileges", "user" })
+@EqualsAndHashCode(exclude = { "privileges" })
+@ToString(exclude = { "privileges" })
 public class Roles{
     @Id
     @Column

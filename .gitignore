@@ -23,5 +23,7 @@ hs_err_pid*
 # intellij idea
 /.idea/*
 *.iml
-springboot-thymeleaf/src/main/java/org/ramer/demo/controller/TestController.java
+/**/TestController.java
+target/
+/**/resources/config
 
