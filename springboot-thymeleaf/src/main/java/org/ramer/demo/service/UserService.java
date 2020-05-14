@@ -3,16 +3,54 @@ package org.ramer.demo.service;
 import org.ramer.demo.domain.User;
 import org.springframework.data.domain.Page;
 
-public interface UserService{
-    User getById(Integer id);
+/**
+ * The interface User service.
+ */
+public interface UserService {
+  /**
+   * Gets by id.
+   *
+   * @param id the id
+   * @return the by id
+   */
+  User getById(Long id);
 
-    User saveOrUpdate(User user);
+  /**
+   * Save or update user.
+   *
+   * @param user the user
+   * @return the user
+   */
+  User saveOrUpdate(User user);
 
-    void delete(Integer id);
+  /**
+   * Delete.
+   *
+   * @param id the id
+   */
+  void delete(Long id);
 
-    void delete(User user);
+  /**
+   * Delete.
+   *
+   * @param user the user
+   */
+  void delete(User user);
 
-    Page<User> getUserByPage(int page, int size);
+  /**
+   * Gets user by page.
+   *
+   * @param page the page
+   * @param size the size
+   * @return the user by page
+   */
+  Page<User> getUserByPage(int page, int size);
 
-    User getByName(String username);
+  /**
+   * Gets by name.
+   *
+   * @param username the username
+   * @return the by name
+   */
+  User getByName(String username);
 }
