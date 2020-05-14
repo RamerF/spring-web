@@ -5,11 +5,25 @@ import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+/**
+ * The interface User repository.
+ */
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer>{
-    @Modifying
-    @Query(value = "delete from User where id = :id")
-    void delete(@Param("id") Integer id);
+public interface UserRepository extends JpaRepository<User, Long> {
+  /**
+   * Delete.
+   *
+   * @param id the id
+   */
+  @Modifying
+  @Query(value = "delete from User where id = :id")
+  void delete(@Param("id") Long id);
 
-    User getByUsername(String username);
+  /**
+   * Gets by username.
+   *
+   * @param username the username
+   * @return the by username
+   */
+  User getByUsername(String username);
 }

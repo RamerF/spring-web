@@ -1,0 +1,18 @@
+server:
+  port: 5080
+spring:
+  application:
+    name: demo-account
+logging:
+  level:
+    root: info
+    org.ramer.demo: debug
+    org.springframework.sercurity: info
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:5000/eureka
+  instance:
+    appname: ${spring.application.name}
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
