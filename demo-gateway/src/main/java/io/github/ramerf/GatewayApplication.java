@@ -1,23 +1,20 @@
-package io.github.ramerf.demo;
+package io.github.ramerf;
 
+import com.didispace.swagger.butler.EnableSwaggerButler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
- * 账户模块.
+ * 网关.
  *
  * @author ramer
  */
 @EnableDiscoveryClient
 @SpringBootApplication
-public class AccountApplication {
-  /**
-   * The entry point of application.
-   *
-   * @param args the input arguments
-   */
+@EnableSwaggerButler
+public class GatewayApplication {
   public static void main(String[] args) {
-    SpringApplication.run(AccountApplication.class, args);
+    SpringApplication.run(GatewayApplication.class, args);
   }
 }

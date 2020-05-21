@@ -1,0 +1,33 @@
+server:
+  port: 3000
+spring:
+  application:
+    name: demo-gateway
+logging:
+  level:
+    root: info
+    io.github.ramerf.demo: debug
+    org.springframework.sercurity: info
+eureka:
+  instance:
+    appname: ${spring.application.name}
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://localhost:5000/eureka
+zuul:
+  host:
+    socket-timeout-millis: 600000
+    connect-timeout-millis: 600000
+  routes:
+    demo-account:
+      path: /demo-account/**
+      serviceId: demo-account
+      strip-prefix: false
+      sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Methods
+swagger:
+  butler:
+    api-docs-path: v2/api-docs
+    auto-generate-from-zuul-routes: true
+    ignore-routes:

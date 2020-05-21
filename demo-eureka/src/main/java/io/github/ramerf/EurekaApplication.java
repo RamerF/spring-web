@@ -1,4 +1,4 @@
-package io.github.ramerf.demo;
+package io.github.ramerf;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

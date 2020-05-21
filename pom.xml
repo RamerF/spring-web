@@ -10,10 +10,23 @@
     </parent>
     <groupId>org.ramer.demo</groupId>
     <artifactId>spring-web</artifactId>
+    <name>spring-web</name>
+    <packaging>pom</packaging>
+    <description>Sample web project use Spring deploy.</description>
     <version>0.0.1-SNAPSHOT</version>
+    <modules>
+        <module>demo-account</module>
+        <module>demo-eureka</module>
+        <module>demo-db</module>
+        <module>springboot-thymeleaf</module>
+    </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-cloud.version>Finchley.SR2</spring-cloud.version>
+        <wind-core.version>3.5.0-RELEASE</wind-core.version>
+        <druid.version>1.1.22</druid.version>
+        <swagger-butler.version>2.0.0</swagger-butler.version>
+        <log4jdbc.version>1.2</log4jdbc.version>
     </properties>
     <dependencies>
         <dependency>
@@ -22,22 +35,7 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.16.18</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
-    <packaging>pom</packaging>
-
-    <name>spring-web</name>
-    <description>Sample web project use Spring deploy.</description>
-    <modules>
-        <module>demo-account</module>
-        <module>demo-eureka</module>
-        <module>springboot-thymeleaf</module>
-    </modules>
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -46,6 +44,28 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.github.ramerf</groupId>
+                <artifactId>wind-core</artifactId>
+                <version>${wind-core.version}</version>
+            </dependency>
+            <!-- druid 官方 starter -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!-- log4jdbc -->
+            <dependency>
+                <groupId>com.googlecode.log4jdbc</groupId>
+                <artifactId>log4jdbc</artifactId>
+                <version>${log4jdbc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.didispace</groupId>
+                <artifactId>swagger-butler-core</artifactId>
+                <version>${swagger-butler.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
