@@ -6,8 +6,7 @@ spring:
 logging:
   level:
     root: info
-    io.github.ramerf.demo: debug
-    org.springframework.sercurity: info
+    io.github.ramerf: debug
 eureka:
   instance:
     appname: ${spring.application.name}
@@ -15,6 +14,7 @@ eureka:
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
   client:
     service-url:
+      # 指定Eureka地址,多个以,分割
       defaultZone: http://localhost:5000/eureka
 zuul:
   host:

@@ -58,8 +58,7 @@ spring:
 logging:
   level:
     root: info
-    io.github.ramerf.demo: debug
-    org.springframework.sercurity: info
+    io.github.ramerf: debug
 eureka:
   client:
     service-url:
