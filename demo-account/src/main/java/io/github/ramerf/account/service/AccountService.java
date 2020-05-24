@@ -1,6 +1,6 @@
 package io.github.ramerf.account.service;
 
-import io.github.ramerf.account.entity.Account;
+import io.github.ramerf.account.entity.pojo.Account;
 import io.github.ramerf.wind.core.service.BaseService;
 
 /**

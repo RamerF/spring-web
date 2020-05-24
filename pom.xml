@@ -17,6 +17,8 @@
     <modules>
         <module>demo-account</module>
         <module>demo-eureka</module>
+        <module>demo-feign</module>
+        <module>demo-gateway</module>
         <module>demo-db</module>
         <module>springboot-thymeleaf</module>
     </modules>

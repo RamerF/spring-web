@@ -1,4 +1,4 @@
-package io.github.ramerf.account.entity;
+package io.github.ramerf.feign.entity.pojo;
 
 import io.github.ramerf.wind.core.entity.enums.InterEnum;
 import io.github.ramerf.wind.core.entity.pojo.AbstractEntityPoJo;

@@ -26,6 +26,11 @@ zuul:
       serviceId: demo-account
       strip-prefix: false
       sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Methods
+    demo-feign:
+      path: /demo-feign/**
+      serviceId: demo-feign
+      strip-prefix: false
+      sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Methods
 swagger:
   butler:
     api-docs-path: v2/api-docs
