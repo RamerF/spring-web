@@ -4,17 +4,17 @@
 # Custom for Visual Studio
 *.cs     diff=csharp
 
-# Standard to msysgit
-*.doc	 diff=astextplain
-*.DOC	 diff=astextplain
-*.docx diff=astextplain
-*.DOCX diff=astextplain
-*.dot  diff=astextplain
-*.DOT  diff=astextplain
-*.pdf  diff=astextplain
-*.PDF	 diff=astextplain
-*.rtf	 diff=astextplain
-*.RTF	 diff=astextplain
+# Standard to git
+*.doc	 diff=textplain
+*.DOC	 diff=textplain
+*.docx diff=textplain
+*.DOCX diff=textplain
+*.dot  diff=textplain
+*.DOT  diff=textplain
+*.pdf  diff=textplain
+*.PDF	 diff=textplain
+*.rtf	 diff=textplain
+*.RTF	 diff=textplain
 
 *.html linguist-language=java
 *.css linguist-language=java
