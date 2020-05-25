@@ -1,5 +1,7 @@
 package io.github.ramerf.account.config;
 
+import io.github.ramerf.wind.core.entity.enums.InterEnum;
+import io.github.ramerf.wind.core.serializer.InterEnumSerializer;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,6 +25,16 @@ public class CommonBean {
   private boolean enableSwagger;
 
   /**
+   * 自定义枚举的序列化格式.
+   *
+   * @return the inter enum serializer
+   */
+  @Bean
+  public InterEnumSerializer interEnumSerializer() {
+    return InterEnum::value;
+  }
+
+  /**
    * Api docket.
    *
    * @return the docket
@@ -31,17 +43,32 @@ public class CommonBean {
   public Docket api() {
     ParameterBuilder parameterBuilder = new ParameterBuilder();
     List<Parameter> parameters = new ArrayList<>();
-    parameterBuilder.name("Authorization").description("Authorization").modelRef(new ModelRef("string"))
-        .parameterType("header").required(false).build();
+    parameterBuilder
+        .name("Authorization")
+        .description("Authorization")
+        .modelRef(new ModelRef("string"))
+        .parameterType("header")
+        .required(false)
+        .build();
     parameters.add(parameterBuilder.build());
-    return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).enable(enableSwagger).select()
-        .apis(RequestHandlerSelectors.basePackage("io.github.ramerf")).paths(PathSelectors.any()).build()
+    return new Docket(DocumentationType.SWAGGER_2)
+        .apiInfo(apiInfo())
+        .enable(enableSwagger)
+        .select()
+        .apis(RequestHandlerSelectors.basePackage("io.github.ramerf"))
+        .paths(PathSelectors.any())
+        .build()
         .globalOperationParameters(parameters);
   }
 
   private ApiInfo apiInfo() {
-    return new ApiInfoBuilder().title("项目接口文档").description("项目描述")
-        .contact(new Contact("Tang Xiaofeng", "https://github.com/ramerf/spring-web.git", "1390635973@qq.com"))
-        .version("1.0.0").build();
+    return new ApiInfoBuilder()
+        .title("项目接口文档")
+        .description("项目描述")
+        .contact(
+            new Contact(
+                "Tang Xiaofeng", "https://github.com/ramerf/spring-web.git", "1390635973@qq.com"))
+        .version("1.0.0")
+        .build();
   }
 }
