@@ -55,10 +55,9 @@ spring:
         # login-password: 123456
   swagger:
     enable: true
-logging:
-  level:
-    root: info
-    io.github.ramerf: debug
+feign:
+  hystrix:
+    enabled: true
 eureka:
   client:
     service-url:
