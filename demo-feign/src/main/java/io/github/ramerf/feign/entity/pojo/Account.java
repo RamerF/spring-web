@@ -18,10 +18,10 @@ public class Account extends AbstractEntityPoJo {
   private Gender gender;
 
   public enum Gender implements InterEnum {
-    /**
-     * 性别.
-     */
-    MALE(0, "男"), FEMALE(1, "女"), NONE(2, "未知");
+    /** 性别. */
+    MALE(0, "男"),
+    FEMALE(1, "女"),
+    NONE(2, "未知");
     private final Integer value;
     private final String desc;
 

@@ -1,5 +1,6 @@
 package io.github.ramerf.account.controller;
 
+import io.github.ramerf.account.entity.pojo.Account;
 import io.github.ramerf.account.service.AccountService;
 import io.github.ramerf.wind.core.entity.response.Rs;
 import javax.annotation.Resource;
@@ -15,8 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/account")
 public class AccountController {
-  @Resource
-  private AccountService service;
+  @Resource private AccountService service;
 
   @GetMapping("/halo")
   public ResponseEntity<Rs<String>> halo() {
@@ -25,7 +25,10 @@ public class AccountController {
 
   @GetMapping("/{id}")
   public ResponseEntity<Rs<String>> getById(@PathVariable("id") final long id) {
-    log.info("getById:[{}]", "获取账户详情");
-    return Rs.ok(service.getById(id));
+    final Account account = service.getById(id);
+    log.info("getById:[{}]", account);
+    return Rs.ok(account);
   }
+
+
 }
