@@ -74,7 +74,7 @@
     <logger name="jdbc.resultset" additivity="false" level="OFF"/>
     <springProfile name="local,default,dev,test">
         <root>
-            <level value="DEBUG"/>
+            <level value="INFO"/>
             <appender-ref ref="common"/>
             <appender-ref ref="error"/>
             <appender-ref ref="console"/>

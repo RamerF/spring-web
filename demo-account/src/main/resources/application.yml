@@ -55,6 +55,11 @@ spring:
         # login-password: 123456
   swagger:
     enable: true
+  redis:
+    host: 192.168.0.138
+    port: 6379
+    database: 5
+    password: ramer
 logging:
   level:
     root: info
@@ -74,3 +79,6 @@ wind:
   snowflake-prop:
     worker-id: 2
     data-center-id: 2
+  redis-cache:
+    enable: true
+    key-prefix: io.github.ramerf.wind
