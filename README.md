@@ -17,7 +17,7 @@
  - ...
 
 ### 关注
-!["公众号"](https://github.com/RamerF/spring-web/blob/master/mp.jpg)
+!["公众号"](mp.jpg)
 
 ### 联系
  - MAIL: feng1390635973@gmail.com
