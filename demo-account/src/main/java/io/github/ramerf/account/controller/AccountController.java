@@ -29,6 +29,4 @@ public class AccountController {
     log.info("getById:[{}]", account);
     return Rs.ok(account);
   }
-
-
 }
