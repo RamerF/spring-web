@@ -16,9 +16,11 @@
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>demo-account</module>
+        <module>demo-cloud-stream</module>
         <module>demo-eureka</module>
         <module>demo-feign</module>
         <module>demo-gateway</module>
+        <module>demo-jdbc</module>
         <module>demo-db</module>
         <module>springboot-thymeleaf</module>
     </modules>
@@ -29,6 +31,7 @@
         <druid.version>1.1.22</druid.version>
         <swagger-butler.version>2.0.0</swagger-butler.version>
         <log4jdbc.version>1.2</log4jdbc.version>
+        <lombok.version>1.18.10</lombok.version>
     </properties>
     <dependencies>
         <dependency>
