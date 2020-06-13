@@ -1,28 +1,21 @@
 # spring-web
-A demo web project use Spring Boot deploy.
+基于springboot的web示例项目.
 
-### Demo list
-
-- Spring Boot
-- Spring-Data-Jpa CRUD
-- Spring-Security
-- Thymeleaf
-- JQuery tools
-  - $.alert 
-  - $.confirm
-  - $(selector).ajaxTable
-  - ...
- - Jdbc CRUD
- - Using OkHttpClient to process http request
- - Convert JSON / XML to object and inverse
+### 项目示例
+ - Spring-Data-Jpa CRUD
+ - Spring-Security
+ - Thymeleaf (springboot-thymeleaf)
+ - jdbc 增删改查 
+ - 使用OkHttp发送请求
+ - XStream处理xml
  - ...
 
-### Follow
+### 关注
 
 !["Wechat"](https://drive.google.com/uc?export=view&id=1Zl6t6fXx0w0m5nH5yrREqIo1bVhSBpoT)
 !["Wechat Mp"](https://drive.google.com/uc?export=view&id=1C42NrtMp_-aFDh-otLvnqLT-ibPVgXTR)
 
-### Contact
+### 联系
 
 MAIL: feng1390635973@gmail.com
 
