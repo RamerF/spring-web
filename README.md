@@ -1,29 +1,24 @@
 # spring-web
-A demo web project use Spring Boot deploy.
+基于springboot的web示例项目.
 
-### Demo list
-
-- Spring Boot
-- Spring-Data-Jpa CRUD
-- Spring-Security
-- Thymeleaf
-- JQuery tools
-  - $.alert 
-  - $.confirm
-  - $(selector).ajaxTable
-  - ...
- - Jdbc CRUD
- - Using OkHttpClient to process http request
- - Convert JSON / XML to object and inverse
+### 项目示例
+ - spring-cloud-stream
+    - rabbitmq
+ - 服务间调用 feign + ribbon
+ - zuul 网关
+ - 服务注册与发现 eureka
+ - swagger + swagger-butler 接口日志聚合
+ - jdbc 增删改查
+ - OkHttp 使用
+ - XStream 处理 xml
+ - thymeleaf
+ - spring-security
+ - spring-data-jpa 增删改查
  - ...
 
-### Follow
+### 关注
+!["公众号"](https://note.youdao.com/yws/public/resource/3c4d11e092d2bcabf12b73e1559e79be/xmlnote/WEBRESOURCEb11838251706400958ba2b62d3f61496/1009)
 
-!["Wechat"](https://drive.google.com/uc?export=view&id=1Zl6t6fXx0w0m5nH5yrREqIo1bVhSBpoT)
-!["Wechat Mp"](https://drive.google.com/uc?export=view&id=1C42NrtMp_-aFDh-otLvnqLT-ibPVgXTR)
-
-### Contact
-
-MAIL: feng1390635973@gmail.com
-
-QQ: 1874890499
+### 联系
+ - MAIL: feng1390635973@gmail.com
+ - QQ: 1874890499

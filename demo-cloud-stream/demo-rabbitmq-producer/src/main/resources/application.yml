@@ -1,0 +1,29 @@
+server:
+  port: 5083
+  servlet:
+    context-path: /demo-rabbitmq-producer
+spring:
+  application:
+    name: demo-rabbitmq-producer
+  cloud:
+    stream:
+      binders:
+        demo-rabbitmq:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
+                # virtual-host: /unicode-pay
+      bindings:
+        # 生产者
+        mq-output:
+          destination: rabbitmq
+          content-type: application/json
+          default-binder: demo-rabbitmq
+          producer:
+            partition-count: 2
+            partition-key-expression: headers['partition']

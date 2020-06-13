@@ -1,0 +1,36 @@
+server:
+  port: 5082
+  servlet:
+    context-path: /demo-rabbitmq-consumer
+spring:
+  application:
+    name: demo-rabbitmq-consumer
+  cloud:
+    stream:
+      binders:
+        demo-rabbitmq:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
+                # virtual-host: /unicode-pay
+      bindings:
+        # 消费者
+        mq-input:
+          # 可以保证同一个组内的消息只被消费一次,当有多个实例时,无法确定每次处理消息的是不是被同一消费者
+          group: group1
+          # 分区保证同一个消息每次由同一个消费者消费
+          consumer:
+            partitioned: true
+          # topic/exchange
+          destination: rabbitmq
+          content-type: application/json
+          default-binder: demo_rabbitmq
+      # 消费实例数量
+      instance-count: 1
+      # 当前实例索引,对应分区
+      instance-index: 1

@@ -1,0 +1,4 @@
+GET http://{{request-path}}/foo/send?inputVal=1
+
+###
+GET http://{{request-path}}/foo/send?inputVal=2
