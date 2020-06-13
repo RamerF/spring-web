@@ -17,7 +17,7 @@
  - ...
 
 ### 关注
-!["公众号"](https://note.youdao.com/yws/public/resource/3c4d11e092d2bcabf12b73e1559e79be/xmlnote/WEBRESOURCEb11838251706400958ba2b62d3f61496/1009)
+!["公众号"](https://github.com/RamerF/spring-web/blob/master/mp.jpg)
 
 ### 联系
  - MAIL: feng1390635973@gmail.com
