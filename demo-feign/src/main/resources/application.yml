@@ -66,6 +66,10 @@ eureka:
     appname: ${spring.application.name}
     prefer-ip-address: true
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
+logging:
+  level:
+    root: info
+    io.github.ramerf: debug
 wind:
   logic-delete-field: isDelete
   logic-not-delete: false
@@ -73,3 +77,5 @@ wind:
   snowflake-prop:
     worker-id: 2
     data-center-id: 2
+  redis-cache:
+    enable: false

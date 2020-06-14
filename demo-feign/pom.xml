@@ -14,7 +14,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <lombok.version>1.18.10</lombok.version>
-        <demo-db.version>0.0.1-SNAPSHOT</demo-db.version>
     </properties>
     <dependencies>
         <dependency>

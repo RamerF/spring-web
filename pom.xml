@@ -32,6 +32,7 @@
         <swagger-butler.version>2.0.0</swagger-butler.version>
         <log4jdbc.version>1.2</log4jdbc.version>
         <lombok.version>1.18.10</lombok.version>
+        <demo-db.version>0.0.1-SNAPSHOT</demo-db.version>
     </properties>
     <dependencies>
         <dependency>
