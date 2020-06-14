@@ -1,0 +1,6 @@
+GET http://{{demo-feign}}/account/get-by-id
+
+###
+GET http://{{demo-feign}}/account/get-by-id2
+
+###

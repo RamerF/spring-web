@@ -1,4 +1,4 @@
-GET http://{{request-path}}/foo/send?inputVal=1
+GET http://{{demo-rabbitmq-producer}}/foo/send?inputVal=1
 
 ###
-GET http://{{request-path}}/foo/send?inputVal=2
+GET http://{{demo-rabbitmq-producer}}/foo/send?inputVal=2
